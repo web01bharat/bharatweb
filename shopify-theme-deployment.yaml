@@ -1,0 +1,48 @@
+
+name: Shopify Theme Deployment
+
+on:
+  push:
+    branches:
+      - main
+      - test
+  pull_request:
+    branches:
+      - main
+      - test
+
+jobs:
+  theme-check:
+    name: Theme Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      
+      - name: Install Shopify CLI
+        run: npm install -g @shopify/cli @shopify/theme
+      
+      - name: Theme Check
+        run: shopify theme check  # Fixed path issue
+        
+  deploy-to-dev:
+    name: Deploy to Development Environment
+    runs-on: ubuntu-latest
+    needs: theme-check
+    if: github.ref == 'refs/heads/test'  # Fixed branch reference
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      
+      - name: Install Shopify CLI
+        run: npm install -g @shopify/cli @shopify/theme
+        
+      - name: Deploy to development theme
+        run: shopify theme push --store=${{ secrets.SHOPIFY_STORE_URL }} --theme=${{ secrets.SHOPIFY_DEV_THEME_ID }}  # Fixed path issue
+        env:
+          SHOPIFY_CLI_STORE: ${{ secrets.SHOPIFY_STORE_URL }}
+          SHOPIFY_CLI_PASSWORD: ${{ secrets.SHOPIFY_PASSWORD }}

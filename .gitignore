@@ -1,0 +1,23 @@
+node_modules/
+.DS_Store
+.env
+.theme-check.yml
+.shopifyignore
+assets/theme.css.map
+package-lock.json
+.shopify
+
+# Prevent theme settings from being committed
+config/settings_data.json
+
+# Prevent section files from being modified by admin
+sections/*.json
+
+# Prevent content files from being committed 
+templates/*.json
+
+# Prevent development artifacts
+.theme-check.yml
+.shopifyignore
+.shopify-cli.yml
+shopify.theme.toml

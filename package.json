@@ -1,0 +1,36 @@
+{
+  "name": "shopify-theme-template",
+  "version": "1.0.0",
+  "description": "A template for Shopify theme development",
+  "scripts": {
+    "dev": "shopify theme dev --theme=<YOUR_THEME_ID>",
+    "test": "shopify theme dev --theme=<YOUR_TEST_THEME_ID>",
+    "pull": "shopify theme pull --path=.",
+    "push": "shopify theme push --path=.",
+    "check": "shopify theme check --path=.",
+    "setup": "bash scripts/setup-theme.sh",
+    "watch": "sass --watch --style=expanded scss/theme.scss:assets/theme.css",
+    "build": "sass --style=compressed scss/theme.scss:assets/theme.css",
+    "lint": "stylelint \"scss/**/*.scss\"",
+    "format": "prettier --write \"{assets,config,layout,locales,sections,snippets,templates}/**/*.{js,json,liquid}\" \"scss/**/*.scss\"",
+    "setup-scss": "bash scripts/setup-scss.sh",
+    "scaffold-section": "bash scripts/scaffold-section.sh"
+  },
+  "keywords": [
+    "shopify",
+    "theme",
+    "development"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@shopify/prettier-plugin-liquid": "^1.0.6",
+    "eslint": "^8.36.0",
+    "prettier": "^2.8.4",
+    "sass": "^1.58.3",
+    "stylelint": "^15.2.0",
+    "stylelint-config-standard-scss": "^7.0.1",
+    "ts-loader": "^9.5.2",
+    "typescript": "^5.8.2"
+  }
+}

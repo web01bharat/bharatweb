@@ -1,0 +1,12 @@
+{
+  "engine": "standard",
+  "globals": {
+    "shop": true,
+    "request": true,
+    "content_for_header": true,
+    "content_for_layout": true
+  },
+  "mixedContent": true,
+  "indentation": 2,
+  "lineBreakSeparator": "unix"
+}
