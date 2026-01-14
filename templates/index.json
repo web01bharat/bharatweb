@@ -6,8 +6,7 @@
  * or related systems. Please exercise caution as any changes
  * made to this file may be overwritten.
  * ------------------------------------------------------------
- */
-{
+ */{
   "sections": {
     "hero_iLBwPd": {
       "type": "hero",
@@ -43,7 +42,6 @@
             "overlay_color": "#00000026",
             "overlay_style": "solid",
             "gradient_direction": "to top",
-            "link": "",
             "open_in_new_tab": false,
             "placeholder": "",
             "padding-block-start": 0,
@@ -83,7 +81,6 @@
                 "overlay_color": "#00000026",
                 "overlay_style": "solid",
                 "gradient_direction": "to top",
-                "link": "",
                 "open_in_new_tab": false,
                 "placeholder": "",
                 "padding-block-start": 0,
@@ -188,14 +185,7 @@
       "name": "t:names.hero",
       "settings": {
         "media_type_1": "image",
-        "image_1": "shopify://shop_images/Christmas_2025_Desktop_Banner_Henry_VIII_and_Six_Queens_with_Anne_B.webp",
         "media_type_2": "image",
-        "image_2": "shopify://shop_images/plastercraft-calco-cipria-3.webp",
-        "stack_media_on_mobile": false,
-        "custom_mobile_media": false,
-        "media_type_1_mobile": "image",
-        "media_type_2_mobile": "image",
-        "link": "",
         "open_in_new_tab": false,
         "content_direction": "column",
         "vertical_on_mobile": true,
@@ -351,7 +341,6 @@
                 "overlay_color": "#00000026",
                 "overlay_style": "solid",
                 "gradient_direction": "to top",
-                "link": "",
                 "open_in_new_tab": false,
                 "padding-block-start": 24,
                 "padding-block-end": 24,
@@ -464,7 +453,6 @@
           "static": true,
           "settings": {
             "media_type": "video",
-            "link": "",
             "video_loop": true,
             "video_autoplay": true,
             "image_position": "cover",
@@ -485,7 +473,6 @@
               "type": "image",
               "name": "t:names.image",
               "settings": {
-                "link": "",
                 "image_ratio": "adapt",
                 "width": "fill",
                 "custom_width": 100,
@@ -623,7 +610,6 @@
             "overlay_color": "#00000026",
             "overlay_style": "solid",
             "gradient_direction": "to top",
-            "link": "",
             "open_in_new_tab": false,
             "placeholder": "",
             "padding-block-start": 0,
@@ -732,7 +718,6 @@
       ],
       "name": "Collection list",
       "settings": {
-        "collection_list": [],
         "layout_type": "bento",
         "carousel_on_mobile": true,
         "columns": 4,
