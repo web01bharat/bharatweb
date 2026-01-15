@@ -514,8 +514,8 @@
       "name": "t:names.media_with_text",
       "settings": {
         "media_position": "right",
-        "media_width": "medium",
-        "media_height": "50svh",
+        "media_width": "wide",
+        "media_height": "60svh",
         "section_width": "page-width",
         "extend_media": true,
         "color_scheme": "scheme-41dbb9c3-0866-4036-9494-aa0e1c1cedda",
