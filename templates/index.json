@@ -419,7 +419,8 @@
           "type": "_media-without-appearance",
           "static": true,
           "settings": {
-            "media_type": "video",
+            "media_type": "image",
+            "image": "shopify://shop_images/Banner_2.jpg",
             "link": "",
             "video_loop": true,
             "video_autoplay": true,
@@ -432,38 +433,16 @@
           "type": "_content-without-appearance",
           "static": true,
           "settings": {
-            "horizontal_alignment_flex_direction_column": "center",
+            "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
             "gap": 24
           },
           "blocks": {
-            "image_y4ApqF": {
-              "type": "image",
-              "name": "t:names.image",
-              "settings": {
-                "link": "",
-                "image_ratio": "adapt",
-                "width": "fill",
-                "custom_width": 100,
-                "width_mobile": "fill",
-                "custom_width_mobile": 100,
-                "height": "fit",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
             "text_Hf79zK": {
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2>Productivity Essentials</h2>",
+                "text": "<h2>Shop All Christmas gifts</h2>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -488,18 +467,18 @@
             "text_jxGhdJ": {
               "type": "text",
               "settings": {
-                "text": "<p>Objects that partner with your digital tools so you can focus on your most important work.</p>",
+                "text": "<p>Discover Kew’s curated Christmas gifts that bring warmth and wonder to every celebration.<br/></p><p>Christmas delivery timeframes;<br/>To ensure your gifts arrive in time for Christmas choose Express UK delivery when placing your order - available until 12pm on Wednesday 17th December</p><h4><strong>Our guaranteed standard delivery before christmas has ended</strong></h4>",
                 "width": "fit-content",
                 "max_width": "narrow",
                 "alignment": "left",
-                "type_preset": "rte",
+                "type_preset": "paragraph",
                 "font": "var(--font-primary--family)",
                 "font_size": "",
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "color": "",
+                "color": "var(--color-foreground)",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
@@ -513,7 +492,7 @@
             "button_zg4nUF": {
               "type": "button",
               "settings": {
-                "label": "Shop Now",
+                "label": "Shop Gift",
                 "link": "shopify://collections/all",
                 "open_in_new_tab": false,
                 "style_class": "button",
@@ -526,7 +505,6 @@
             }
           },
           "block_order": [
-            "image_y4ApqF",
             "text_Hf79zK",
             "text_jxGhdJ",
             "button_zg4nUF"
@@ -535,7 +513,7 @@
       },
       "name": "t:names.media_with_text",
       "settings": {
-        "media_position": "left",
+        "media_position": "right",
         "media_width": "medium",
         "media_height": "50svh",
         "section_width": "page-width",
