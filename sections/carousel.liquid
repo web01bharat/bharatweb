@@ -8,7 +8,7 @@
     color-{{ section.settings.color_scheme }}
     section-carousel
     spacing-style
-    gap-style
+    gap-style{% if section.settings.custom_class != blank %} {{ section.settings.custom_class }}{% endif %} section-{{ section.id }}
   "
   style="
     {% render 'spacing-style', settings: section.settings %}
