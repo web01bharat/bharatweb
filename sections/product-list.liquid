@@ -13,7 +13,9 @@
     color-{{ section.settings.color_scheme }}
     section-resource-list
     spacing-style
-    gap-style
+    gap-style 
+     {{ section.settings.custom_class }}
+    section-{{ section.id }}
   "
   style="
     {% render 'spacing-style', settings: section.settings %}
