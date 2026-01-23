@@ -1,0 +1,99 @@
+/* Product Custom Tabs Enhancement Styles */
+
+/* Ensure tabs work well with existing theme components */
+.product-custom-tabs {
+  /* Ensure proper z-indexing with other product components */
+  position: relative;
+  z-index: 1;
+}
+
+/* Integration with existing product sections */
+.section-product-custom-tabs + .section {
+  margin-top: var(--spacing-section);
+}
+
+/* Mobile accordion enhancements */
+@media screen and (max-width: 749px) {
+  .product-custom-tabs__nav[data-mobile-mode="true"] {
+    display: block;
+  }
+  
+  .product-custom-tabs__nav[data-mobile-mode="true"] .product-custom-tabs__tab {
+    width: 100%;
+    border-bottom: 1px solid var(--color-border);
+    border-radius: 0;
+    text-align: left;
+    padding: var(--spacing-md);
+  }
+  
+  .product-custom-tabs__nav[data-mobile-mode="true"] .product-custom-tabs__tab:hover {
+    background-color: var(--color-background-secondary);
+  }
+  
+  .product-custom-tabs__nav[data-mobile-mode="true"] .product-custom-tabs__tab--active {
+    background-color: var(--color-accent-bg);
+    color: var(--color-accent-fg);
+    border-color: var(--color-accent);
+  }
+}
+
+/* Enhance accordion integration */
+.product-custom-tabs__panel accordion-custom {
+  margin-bottom: var(--spacing-md);
+}
+
+.product-custom-tabs__panel accordion-custom:last-child {
+  margin-bottom: 0;
+}
+
+/* Loading state */
+.product-custom-tabs[data-loading="true"] .product-custom-tabs__panel-content {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Focus management */
+.product-custom-tabs__tab:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.product-custom-tabs__panel:focus-visible {
+  outline: 1px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+/* Smooth transitions */
+.product-custom-tabs__tab {
+  transition: all 0.2s ease-in-out;
+}
+
+.product-custom-tabs__panel-content > * {
+  animation-delay: 0.1s;
+}
+
+/* Print styles */
+@media print {
+  .product-custom-tabs__nav {
+    display: none;
+  }
+  
+  .product-custom-tabs__panel {
+    display: block !important;
+    page-break-inside: avoid;
+  }
+  
+  .product-custom-tabs__panel:not(:first-child) {
+    margin-top: var(--spacing-lg);
+  }
+  
+  .product-custom-tabs__panel::before {
+    content: attr(aria-labelledby);
+    font-weight: bold;
+    display: block;
+    margin-bottom: var(--spacing-sm);
+    text-transform: uppercase;
+    font-size: var(--font-size-sm);
+    color: var(--color-foreground-secondary);
+  }
+}

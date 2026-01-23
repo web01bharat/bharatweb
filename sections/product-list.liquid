@@ -14,6 +14,8 @@
     section-resource-list
     spacing-style
     gap-style
+    {{ section.settings.custom_class }}
+    section-{{ section.id }}
   "
   style="
     {% render 'spacing-style', settings: section.settings %}
@@ -316,6 +318,13 @@
       "id": "color_scheme",
       "label": "t:settings.color_scheme",
       "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom CSS Class",
+      "info": "Add custom CSS classes to this section (space-separated)",
+      "default": "test-class"
     },
     {
       "type": "header",

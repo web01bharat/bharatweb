@@ -1,0 +1,521 @@
+{% comment %}
+  Product Custom Tabs Section
+  Displays product-specific tabbed content with accordion support
+{% endcomment %}
+
+{%- liquid
+  assign section_settings = section.settings
+  if section.blocks.size == 0
+    assign section_empty = true
+  endif
+-%}
+
+<script
+  src="{{ 'product-custom-tabs.js' | asset_url }}"
+  type="module"
+  fetchpriority="low"
+></script>
+
+<link rel="stylesheet" href="{{ 'product-custom-tabs-enhancement.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="{{ 'product-custom-tabs-enhancement.css' | asset_url }}"></noscript>
+
+{% unless section_empty %}
+  <div class="section-background color-{{ section_settings.color_scheme }}"></div>
+  <div
+    class="
+      section
+      section--{{ section_settings.section_width }}
+      section-product-custom-tabs
+      color-{{ section_settings.color_scheme }}
+      spacing-style
+      gap-style
+    "
+    style="
+      {% render 'spacing-style', settings: section_settings %}
+      {% render 'gap-style', value: section_settings.gap %}
+    "
+    data-testid="product-custom-tabs"
+  >
+    <div class="product-custom-tabs__container">
+      {% if section_settings.heading != blank %}
+        <div class="product-custom-tabs__heading">
+          <h2 class="h3">{{ section_settings.heading | escape }}</h2>
+        </div>
+      {% endif %}
+
+      <product-custom-tabs class="product-custom-tabs" data-product-id="{{ product.id }}">
+        <!-- Tab Navigation -->
+        <div class="product-custom-tabs__nav" role="tablist">
+          {% for block in section.blocks %}
+            {%- liquid
+              assign tab_id = 'tab-' | append: block.id
+              assign panel_id = 'panel-' | append: block.id
+              assign is_first = forloop.first
+            -%}
+            <button
+              class="product-custom-tabs__tab{% if is_first %} product-custom-tabs__tab--active{% endif %}"
+              role="tab"
+              aria-selected="{% if is_first %}true{% else %}false{% endif %}"
+              aria-controls="{{ panel_id }}"
+              id="{{ tab_id }}"
+              data-tab-index="{{ forloop.index0 }}"
+              {{ block.shopify_attributes }}
+            >
+              {% if block.settings.tab_icon != 'none' %}
+                <span class="product-custom-tabs__tab-icon svg-wrapper">
+                  {{ block.settings.tab_icon | append: '.svg' | inline_asset_content }}
+                </span>
+              {% endif %}
+              <span class="product-custom-tabs__tab-text">
+                {{ block.settings.tab_title | default: block.settings.heading | escape }}
+              </span>
+            </button>
+          {% endfor %}
+        </div>
+
+        <!-- Tab Panels -->
+        <div class="product-custom-tabs__panels">
+          {% for block in section.blocks %}
+            {%- liquid
+              assign tab_id = 'tab-' | append: block.id
+              assign panel_id = 'panel-' | append: block.id
+              assign is_first = forloop.first
+            -%}
+            <div
+              class="product-custom-tabs__panel{% if is_first %} product-custom-tabs__panel--active{% endif %}"
+              role="tabpanel"
+              aria-labelledby="{{ tab_id }}"
+              id="{{ panel_id }}"
+              tabindex="0"
+              {% unless is_first %}hidden{% endunless %}
+              {{ block.shopify_attributes }}
+            >
+              <div class="product-custom-tabs__panel-content">
+                {% case block.type %}
+                  {% when 'tab_content' %}
+                    {% render 'product-custom-tab-content', block: block, product: product %}
+                  {% when 'tab_accordion' %}
+                    {% render 'product-custom-tab-accordion', block: block, product: product %}
+                  {% when 'tab_specifications' %}
+                    {% render 'product-custom-tab-specifications', block: block, product: product %}
+                  {% when 'tab_metafields' %}
+                    {% render 'product-custom-tab-metafields', block: block, product: product %}
+                {% endcase %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </product-custom-tabs>
+    </div>
+  </div>
+{% endunless %}
+
+{% stylesheet %}
+  .product-custom-tabs__container {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .product-custom-tabs__heading {
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+  }
+
+  .product-custom-tabs {
+    width: 100%;
+  }
+
+  /* Tab Navigation */
+  .product-custom-tabs__nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: var(--spacing-lg);
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+
+  .product-custom-tabs__nav::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .product-custom-tabs__nav::-webkit-scrollbar-track {
+    background: var(--color-background-secondary);
+  }
+
+  .product-custom-tabs__nav::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 2px;
+  }
+
+  .product-custom-tabs__tab {
+    background: transparent;
+    border: none;
+    padding: var(--spacing-md) var(--spacing-lg);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-foreground-secondary);
+    min-height: var(--minimum-touch-target);
+  }
+
+  .product-custom-tabs__tab:hover,
+  .product-custom-tabs__tab:focus {
+    color: var(--color-foreground);
+    background-color: var(--color-background-secondary);
+  }
+
+  .product-custom-tabs__tab--active {
+    color: var(--color-accent);
+    border-bottom-color: var(--color-accent);
+  }
+
+  .product-custom-tabs__tab-icon {
+    width: 1.2rem;
+    height: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  /* Tab Panels */
+  .product-custom-tabs__panels {
+    position: relative;
+    min-height: 200px;
+  }
+
+  .product-custom-tabs__panel {
+    width: 100%;
+  }
+
+  .product-custom-tabs__panel:not(.product-custom-tabs__panel--active) {
+    display: none;
+  }
+
+  .product-custom-tabs__panel-content {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Mobile responsive */
+  @media screen and (max-width: 749px) {
+    .product-custom-tabs__nav {
+      border-bottom: none;
+      flex-direction: column;
+      margin-bottom: 0;
+    }
+
+    .product-custom-tabs__tab {
+      width: 100%;
+      justify-content: flex-start;
+      border-bottom: 1px solid var(--color-border);
+      border-radius: 0;
+    }
+
+    .product-custom-tabs__tab:last-child {
+      border-bottom: none;
+    }
+
+    .product-custom-tabs__panels {
+      min-height: auto;
+    }
+
+    .product-custom-tabs__panel-content {
+      padding-top: var(--spacing-md);
+    }
+  }
+
+  /* Accordion styles within tabs */
+  .product-custom-tabs__panel .accordion {
+    margin-top: 0;
+  }
+
+  .product-custom-tabs__panel .accordion--dividers accordion-custom:first-child .details {
+    border-top: none;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Product Custom Tabs",
+  "tag": "section",
+  "class": "section-product-custom-tabs",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section heading",
+      "default": "Product Details"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Section width",
+      "options": [
+        {
+          "value": "page-width",
+          "label": "Page width"
+        },
+        {
+          "value": "full-width",
+          "label": "Full width"
+        }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Gap between content",
+      "min": 0,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Section spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab_content",
+      "name": "Basic Tab Content",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Tab title",
+          "default": "Content"
+        },
+        {
+          "type": "select",
+          "id": "tab_icon",
+          "label": "Tab icon",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "icon-info", "label": "Info" },
+            { "value": "icon-inventory", "label": "Inventory" },
+            { "value": "icon-external", "label": "External" },
+            { "value": "icon-checkmark", "label": "Checkmark" }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Tab content",
+          "default": "<p>Add your custom content here.</p>"
+        }
+      ]
+    },
+    {
+      "type": "tab_accordion",
+      "name": "Accordion Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Tab title",
+          "default": "Details"
+        },
+        {
+          "type": "select",
+          "id": "tab_icon",
+          "label": "Tab icon",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "icon-info", "label": "Info" },
+            { "value": "icon-inventory", "label": "Inventory" },
+            { "value": "icon-external", "label": "External" },
+            { "value": "icon-checkmark", "label": "Checkmark" }
+          ],
+          "default": "icon-info"
+        },
+        {
+          "type": "select",
+          "id": "accordion_icon",
+          "label": "Accordion icon",
+          "options": [
+            { "value": "caret", "label": "Caret" },
+            { "value": "plus", "label": "Plus" }
+          ],
+          "default": "caret"
+        },
+        {
+          "type": "checkbox",
+          "id": "dividers",
+          "label": "Show dividers",
+          "default": true
+        }
+      ]
+    },
+    {
+      "type": "tab_specifications",
+      "name": "Product Specifications",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Tab title",
+          "default": "Specifications"
+        },
+        {
+          "type": "select",
+          "id": "tab_icon",
+          "label": "Tab icon",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "icon-info", "label": "Info" },
+            { "value": "icon-inventory", "label": "Inventory" },
+            { "value": "icon-external", "label": "External" },
+            { "value": "icon-checkmark", "label": "Checkmark" }
+          ],
+          "default": "icon-inventory"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_product_type",
+          "label": "Show product type",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_vendor",
+          "label": "Show vendor",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_tags",
+          "label": "Show tags",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "show_sku",
+          "label": "Show SKU",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_barcode",
+          "label": "Show barcode",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "show_weight",
+          "label": "Show weight",
+          "default": true
+        }
+      ]
+    },
+    {
+      "type": "tab_metafields",
+      "name": "Product Metafields",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Tab title",
+          "default": "Additional Info"
+        },
+        {
+          "type": "select",
+          "id": "tab_icon",
+          "label": "Tab icon",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "icon-info", "label": "Info" },
+            { "value": "icon-inventory", "label": "Inventory" },
+            { "value": "icon-external", "label": "External" },
+            { "value": "icon-checkmark", "label": "Checkmark" }
+          ],
+          "default": "icon-external"
+        },
+        {
+          "type": "text",
+          "id": "metafield_namespace",
+          "label": "Metafield namespace",
+          "info": "Enter the namespace of your product metafields"
+        },
+        {
+          "type": "textarea",
+          "id": "metafield_keys",
+          "label": "Metafield keys",
+          "info": "Enter metafield keys separated by commas (e.g., material, care_instructions, dimensions)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Custom Tabs",
+      "blocks": [
+        {
+          "type": "tab_content",
+          "settings": {
+            "tab_title": "Description",
+            "content": "<p>Product description and features.</p>"
+          }
+        },
+        {
+          "type": "tab_accordion",
+          "settings": {
+            "tab_title": "Details"
+          }
+        },
+        {
+          "type": "tab_specifications",
+          "settings": {
+            "tab_title": "Specifications"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

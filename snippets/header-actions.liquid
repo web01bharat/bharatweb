@@ -16,10 +16,11 @@
       class="svg-wrapper"
       aria-hidden="true"
     >
-      {{ 'icon-cart.svg' | inline_asset_content }}
+      {{ 'icon-cart.svg' | inline_asset_content }} {% render 'cart-bubble', limit: 100, live_region: true, test_id: test_id %} cart
     </span>
+    
 
-    {% render 'cart-bubble', limit: 100, live_region: true, test_id: test_id %}
+    
   </cart-icon>
 {% endcapture %}
 
@@ -600,7 +601,7 @@
   }
 
   .header-actions__cart-icon .cart-bubble {
-    position: absolute;
+    
     width: var(--cart-bubble-size, 20px);
     top: var(--cart-bubble-top);
     right: var(--cart-bubble-right);

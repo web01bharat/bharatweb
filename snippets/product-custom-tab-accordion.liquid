@@ -1,0 +1,167 @@
+{% comment %}
+  Product Custom Tab - Accordion Content
+  Renders accordion-style content for a tab with product-specific information
+{% endcomment %}
+
+{%- liquid
+  assign block_settings = block.settings
+-%}
+
+<div 
+  class="
+    product-custom-tab-accordion
+    accordion
+    accordion--{{ block_settings.accordion_icon | default: 'caret' }}
+    {% if block_settings.dividers %}accordion--dividers{% endif %}
+  "
+>
+  
+  <!-- Materials Accordion Row -->
+  <accordion-custom>
+    <details class="details">
+      <summary class="details__header">
+        <span class="svg-wrapper icon-inventory details__icon">
+          {{ 'icon-inventory.svg' | inline_asset_content }}
+        </span>
+        Materials
+        <span class="svg-wrapper icon-caret icon-animated">
+          {{ 'icon-caret.svg' | inline_asset_content }}
+        </span>
+        <span class="svg-wrapper icon-plus">
+          {{ 'icon-plus.svg' | inline_asset_content }}
+        </span>
+      </summary>
+      <div class="details-content">
+        {% if product.metafields.specifications.materials != blank %}
+          <div class="rte">{{ product.metafields.specifications.materials }}</div>
+        {% elsif product.metafields.custom.materials != blank %}
+          <div class="rte">{{ product.metafields.custom.materials }}</div>
+        {% else %}
+          <p>Material information not available for this product.</p>
+        {% endif %}
+      </div>
+    </details>
+  </accordion-custom>
+
+  <!-- Care Instructions Accordion Row -->
+  <accordion-custom>
+    <details class="details">
+      <summary class="details__header">
+        <span class="svg-wrapper icon-info details__icon">
+          {{ 'icon-info.svg' | inline_asset_content }}
+        </span>
+        Care Instructions
+        <span class="svg-wrapper icon-caret icon-animated">
+          {{ 'icon-caret.svg' | inline_asset_content }}
+        </span>
+        <span class="svg-wrapper icon-plus">
+          {{ 'icon-plus.svg' | inline_asset_content }}
+        </span>
+      </summary>
+      <div class="details-content">
+        {% if product.metafields.specifications.care_instructions != blank %}
+          <div class="rte">{{ product.metafields.specifications.care_instructions }}</div>
+        {% elsif product.metafields.custom.care_instructions != blank %}
+          <div class="rte">{{ product.metafields.custom.care_instructions }}</div>
+        {% else %}
+          <p>Care instruction information not available for this product.</p>
+        {% endif %}
+      </div>
+    </details>
+  </accordion-custom>
+
+  <!-- Sizing & Fit Accordion Row -->
+  <accordion-custom>
+    <details class="details">
+      <summary class="details__header">
+        <span class="svg-wrapper icon-external details__icon">
+          {{ 'icon-external.svg' | inline_asset_content }}
+        </span>
+        Sizing & Fit
+        <span class="svg-wrapper icon-caret icon-animated">
+          {{ 'icon-caret.svg' | inline_asset_content }}
+        </span>
+        <span class="svg-wrapper icon-plus">
+          {{ 'icon-plus.svg' | inline_asset_content }}
+        </span>
+      </summary>
+      <div class="details-content">
+        {% if product.metafields.specifications.sizing != blank %}
+          <div class="rte">{{ product.metafields.specifications.sizing }}</div>
+        {% elsif product.metafields.custom.sizing != blank %}
+          <div class="rte">{{ product.metafields.custom.sizing }}</div>
+        {% else %}
+          <div class="sizing-info-default">
+            <p>Please refer to our size guide for detailed measurements.</p>
+            {% if product.variants.size > 1 %}
+              <p><strong>Available sizes:</strong></p>
+              <ul>
+                {% for variant in product.variants %}
+                  {% if variant.option1 != blank and variant.available %}
+                    <li>{{ variant.option1 }}</li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+    </details>
+  </accordion-custom>
+
+  <!-- Shipping Info Accordion Row -->
+  <accordion-custom>
+    <details class="details">
+      <summary class="details__header">
+        <span class="svg-wrapper icon-external details__icon">
+          {{ 'icon-external.svg' | inline_asset_content }}
+        </span>
+        Shipping Info
+        <span class="svg-wrapper icon-caret icon-animated">
+          {{ 'icon-caret.svg' | inline_asset_content }}
+        </span>
+        <span class="svg-wrapper icon-plus">
+          {{ 'icon-plus.svg' | inline_asset_content }}
+        </span>
+      </summary>
+      <div class="details-content">
+        {% if product.metafields.shipping.info != blank %}
+          <div class="rte">{{ product.metafields.shipping.info }}</div>
+        {% elsif product.metafields.custom.shipping != blank %}
+          <div class="rte">{{ product.metafields.custom.shipping }}</div>
+        {% else %}
+          <div class="shipping-info-default">
+            <p>Standard shipping applies to this product.</p>
+            {% if product.variants.first.weight > 0 %}
+              <p><strong>Weight:</strong> {{ product.variants.first.weight | weight_with_unit }}</p>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+    </details>
+  </accordion-custom>
+
+</div>
+
+<style>
+  .product-custom-tab-accordion {
+    width: 100%;
+  }
+
+  .product-custom-tab-accordion .details__icon {
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-right: var(--spacing-xs);
+  }
+
+  .sizing-info-default ul,
+  .shipping-info-default ul {
+    margin-top: var(--spacing-xs);
+    padding-left: var(--spacing-md);
+  }
+
+  .sizing-info-default li,
+  .shipping-info-default li {
+    margin-bottom: var(--spacing-2xs);
+  }
+</style>

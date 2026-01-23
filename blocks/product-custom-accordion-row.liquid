@@ -1,0 +1,107 @@
+{% comment %}
+  Product Custom Accordion Row
+  Used within product custom tabs to create dynamic accordion content
+{% endcomment %}
+
+{%- liquid
+  assign block_settings = block.settings
+-%}
+
+<accordion-custom
+  {% if block_settings.open_by_default %}
+    open-by-default-on-desktop
+    open-by-default-on-mobile
+  {% endif %}
+>
+  <details
+    class="details"
+    data-testid="product-accordion-details"
+    {% if block_settings.open_by_default %}
+      open
+    {% endif %}
+    {{ block.shopify_attributes }}
+  >
+    <summary class="details__header">
+      {% if block_settings.icon != 'none' %}
+        <span class="svg-wrapper {{ block_settings.icon }} details__icon">
+          {{ block_settings.icon | append: '.svg' | inline_asset_content }}
+        </span>
+      {% endif %}
+      
+      <span class="accordion-row-heading">
+        {% if block_settings.heading != blank %}
+          {{ block_settings.heading | escape }}
+        {% else %}
+          Product Information
+        {% endif %}
+      </span>
+      
+      <span class="svg-wrapper icon-caret icon-animated">
+        {{ 'icon-caret.svg' | inline_asset_content }}
+      </span>
+      <span class="svg-wrapper icon-plus">
+        {{ 'icon-plus.svg' | inline_asset_content }}
+      </span>
+    </summary>
+
+    <div class="details-content">
+      {% if block_settings.content_type == 'custom' and block_settings.custom_content != blank %}
+        <div class="rte">{{ block_settings.custom_content }}</div>
+      {% elsif block_settings.content_type == 'product_description' %}
+        {% if product.description != blank %}
+          <div class="rte">{{ product.description }}</div>
+        {% else %}
+          <p>No product description available.</p>
+        {% endif %}
+      {% elsif block_settings.content_type == 'metafield' and block_settings.metafield_namespace != blank and block_settings.metafield_key != blank %}
+        {%- liquid
+          assign namespace = block_settings.metafield_namespace
+          assign key = block_settings.metafield_key
+          assign metafield_value = product.metafields[namespace][key]
+        -%}
+        {% if metafield_value != blank %}
+          <div class="rte">{{ metafield_value.value }}</div>
+        {% else %}
+          <p>No information available for this product.</p>
+        {% endif %}
+      {% elsif block_settings.content_type == 'specifications' %}
+        <div class="product-basic-specifications">
+          <p><strong>Product Type:</strong> {{ product.type | default: 'Not specified' }}</p>
+          <p><strong>Vendor:</strong> {{ product.vendor | default: 'Not specified' }}</p>
+          {% if product.variants.first.sku != blank %}
+            <p><strong>SKU:</strong> {{ product.variants.first.sku }}</p>
+          {% endif %}
+        </div>
+      {% elsif block_settings.content_type == 'care_instructions' %}
+        <div class="product-care-instructions">
+          {% if product.metafields.custom.care_instructions != blank %}
+            <div class="rte">{{ product.metafields.custom.care_instructions }}</div>
+          {% else %}
+            <p>Follow standard care instructions for this type of product.</p>
+          {% endif %}
+        </div>
+      {% else %}
+        {% content_for 'blocks' %}
+      {% endif %}
+    </div>
+  </details>
+</accordion-custom>
+
+<style>
+  .details__icon {
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-right: var(--spacing-xs);
+    flex-shrink: 0;
+  }
+
+  .accordion-row-heading {
+    flex-grow: 1;
+  }
+
+  .details__header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+  }
+</style>

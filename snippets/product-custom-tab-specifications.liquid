@@ -1,0 +1,218 @@
+{% comment %}
+  Product Custom Tab - Specifications Content
+  Renders product specifications in a structured format
+{% endcomment %}
+
+{%- liquid
+  assign block_settings = block.settings
+  assign current_variant = product.selected_or_first_available_variant
+-%}
+
+<div class="product-custom-tab-specifications">
+  <dl class="product-specifications">
+    
+    {% if block_settings.show_product_type and product.type != blank %}
+      <div class="product-specifications__item">
+        <dt class="product-specifications__label">Product Type</dt>
+        <dd class="product-specifications__value">{{ product.type }}</dd>
+      </div>
+    {% endif %}
+
+    {% if block_settings.show_vendor and product.vendor != blank %}
+      <div class="product-specifications__item">
+        <dt class="product-specifications__label">Brand</dt>
+        <dd class="product-specifications__value">{{ product.vendor }}</dd>
+      </div>
+    {% endif %}
+
+    {% if block_settings.show_sku and current_variant.sku != blank %}
+      <div class="product-specifications__item">
+        <dt class="product-specifications__label">SKU</dt>
+        <dd class="product-specifications__value">{{ current_variant.sku }}</dd>
+      </div>
+    {% endif %}
+
+    {% if block_settings.show_barcode and current_variant.barcode != blank %}
+      <div class="product-specifications__item">
+        <dt class="product-specifications__label">Barcode</dt>
+        <dd class="product-specifications__value">{{ current_variant.barcode }}</dd>
+      </div>
+    {% endif %}
+
+    {% if block_settings.show_weight and current_variant.weight > 0 %}
+      <div class="product-specifications__item">
+        <dt class="product-specifications__label">Weight</dt>
+        <dd class="product-specifications__value">{{ current_variant.weight | weight_with_unit }}</dd>
+      </div>
+    {% endif %}
+
+    {% comment %} Custom metafields specifications {% endcomment %}
+    {% if product.metafields.specifications.dimensions != blank %}
+      <div class="product-specifications__item">
+        <dt class="product-specifications__label">Dimensions</dt>
+        <dd class="product-specifications__value">{{ product.metafields.specifications.dimensions }}</dd>
+      </div>
+    {% endif %}
+
+    {% if product.metafields.specifications.color != blank %}
+      <div class="product-specifications__item">
+        <dt class="product-specifications__label">Color</dt>
+        <dd class="product-specifications__value">{{ product.metafields.specifications.color }}</dd>
+      </div>
+    {% endif %}
+
+    {% if product.metafields.specifications.material != blank %}
+      <div class="product-specifications__item">
+        <dt class="product-specifications__label">Material</dt>
+        <dd class="product-specifications__value">{{ product.metafields.specifications.material }}</dd>
+      </div>
+    {% endif %}
+
+    {% if product.metafields.specifications.origin != blank %}
+      <div class="product-specifications__item">
+        <dt class="product-specifications__label">Country of Origin</dt>
+        <dd class="product-specifications__value">{{ product.metafields.specifications.origin }}</dd>
+      </div>
+    {% endif %}
+
+    {% if product.metafields.specifications.warranty != blank %}
+      <div class="product-specifications__item">
+        <dt class="product-specifications__label">Warranty</dt>
+        <dd class="product-specifications__value">{{ product.metafields.specifications.warranty }}</dd>
+      </div>
+    {% endif %}
+
+    {% if block_settings.show_tags and product.tags.size > 0 %}
+      <div class="product-specifications__item">
+        <dt class="product-specifications__label">Tags</dt>
+        <dd class="product-specifications__value">
+          <div class="product-tags">
+            {% for tag in product.tags limit: 10 %}
+              <span class="product-tag">{{ tag }}</span>
+            {% endfor %}
+          </div>
+        </dd>
+      </div>
+    {% endif %}
+
+    {% comment %} Available Options {% endcomment %}
+    {% if product.options.size > 1 %}
+      {% for option in product.options %}
+        {% unless option.name == 'Title' %}
+          <div class="product-specifications__item">
+            <dt class="product-specifications__label">{{ option.name }}</dt>
+            <dd class="product-specifications__value">
+              <div class="product-option-values">
+                {% assign option_values = '' %}
+                {% for variant in product.variants %}
+                  {% case forloop.index0 %}
+                    {% when 0 %}
+                      {% assign current_option_value = variant.option1 %}
+                    {% when 1 %}
+                      {% assign current_option_value = variant.option2 %}
+                    {% when 2 %}
+                      {% assign current_option_value = variant.option3 %}
+                  {% endcase %}
+                  
+                  {% if option.position == option.position %}
+                    {% unless option_values contains current_option_value %}
+                      {% assign option_values = option_values | append: current_option_value | append: ',' %}
+                    {% endunless %}
+                  {% endif %}
+                {% endfor %}
+                
+                {% assign values_array = option_values | split: ',' %}
+                {% for value in values_array %}
+                  {% if value != blank %}
+                    <span class="product-option-value">{{ value }}</span>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </dd>
+          </div>
+        {% endunless %}
+      {% endfor %}
+    {% endif %}
+  </dl>
+</div>
+
+<style>
+  .product-custom-tab-specifications {
+    width: 100%;
+  }
+
+  .product-specifications {
+    display: grid;
+    gap: var(--spacing-sm);
+    margin: 0;
+  }
+
+  .product-specifications__item {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: var(--spacing-md);
+    align-items: start;
+    padding: var(--spacing-sm);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .product-specifications__item:last-child {
+    border-bottom: none;
+  }
+
+  .product-specifications__label {
+    font-weight: var(--font-weight-medium);
+    color: var(--color-foreground-secondary);
+    margin: 0;
+    font-size: var(--font-size-sm);
+  }
+
+  .product-specifications__value {
+    color: var(--color-foreground);
+    margin: 0;
+    font-size: var(--font-size-sm);
+  }
+
+  .product-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+  }
+
+  .product-tag {
+    display: inline-block;
+    padding: var(--spacing-2xs) var(--spacing-xs);
+    background-color: var(--color-background-secondary);
+    border-radius: var(--border-radius-sm);
+    font-size: var(--font-size-xs);
+    color: var(--color-foreground-secondary);
+    text-transform: capitalize;
+  }
+
+  .product-option-values {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-xs);
+  }
+
+  .product-option-value {
+    display: inline-block;
+    padding: var(--spacing-2xs) var(--spacing-sm);
+    background-color: var(--color-accent-bg);
+    color: var(--color-accent-fg);
+    border-radius: var(--border-radius-sm);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+  }
+
+  @media screen and (max-width: 749px) {
+    .product-specifications__item {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-xs);
+    }
+    
+    .product-specifications__label {
+      font-weight: var(--font-weight-bold);
+    }
+  }
+</style>

@@ -1,0 +1,281 @@
+{% comment %}
+  Product Custom Tab - Metafields Content
+  Renders custom metafields based on namespace and keys provided
+{% endcomment %}
+
+{%- liquid
+  assign block_settings = block.settings
+  assign namespace = block_settings.metafield_namespace | default: 'custom'
+  assign keys = block_settings.metafield_keys | split: ','
+-%}
+
+<div class="product-custom-tab-metafields">
+  {% if keys.size > 0 and namespace != blank %}
+    <div class="product-metafields">
+      {% for key_raw in keys %}
+        {%- liquid
+          assign key = key_raw | strip
+          assign metafield_value = product.metafields[namespace][key]
+        -%}
+        
+        {% if metafield_value != blank %}
+          <div class="product-metafield-item">
+            <h4 class="product-metafield-label">
+              {{ key | replace: '_', ' ' | capitalize }}
+            </h4>
+            <div class="product-metafield-value">
+              {% case metafield_value.type %}
+                {% when 'single_line_text_field' or 'multi_line_text_field' %}
+                  <div class="rte">{{ metafield_value.value }}</div>
+                {% when 'url' %}
+                  <a href="{{ metafield_value.value }}" target="_blank" rel="noopener noreferrer">
+                    {{ metafield_value.value }}
+                  </a>
+                {% when 'file_reference' %}
+                  {% if metafield_value.value.media_type == 'image' %}
+                    {{
+                      metafield_value.value
+                      | image_url: width: 600
+                      | image_tag:
+                        loading: 'lazy',
+                        alt: metafield_value.value.alt | default: key,
+                        class: 'product-metafield-image',
+                        width: metafield_value.value.width,
+                        height: metafield_value.value.height
+                    }}
+                  {% else %}
+                    <a href="{{ metafield_value.value.url }}" download>
+                      {{ metafield_value.value.filename | default: 'Download file' }}
+                    </a>
+                  {% endif %}
+                {% when 'list.single_line_text_field' %}
+                  <ul class="product-metafield-list">
+                    {% for item in metafield_value.value %}
+                      <li>{{ item }}</li>
+                    {% endfor %}
+                  </ul>
+                {% when 'boolean' %}
+                  {% if metafield_value.value == true %}
+                    <span class="product-metafield-boolean product-metafield-boolean--true">
+                      <span class="svg-wrapper icon-checkmark">
+                        {{ 'icon-checkmark.svg' | inline_asset_content }}
+                      </span>
+                      Yes
+                    </span>
+                  {% else %}
+                    <span class="product-metafield-boolean product-metafield-boolean--false">
+                      No
+                    </span>
+                  {% endif %}
+                {% when 'number_integer' or 'number_decimal' %}
+                  <span class="product-metafield-number">{{ metafield_value.value }}</span>
+                {% when 'date' %}
+                  <time datetime="{{ metafield_value.value | date: '%Y-%m-%d' }}">
+                    {{ metafield_value.value | date: '%B %d, %Y' }}
+                  </time>
+                {% when 'date_time' %}
+                  <time datetime="{{ metafield_value.value | date: '%Y-%m-%dT%H:%M:%S' }}">
+                    {{ metafield_value.value | date: '%B %d, %Y at %I:%M %p' }}
+                  </time>
+                {% when 'json' %}
+                  <details class="product-metafield-json">
+                    <summary>View JSON Data</summary>
+                    <pre><code>{{ metafield_value.value | json }}</code></pre>
+                  </details>
+                {% when 'color' %}
+                  <div class="product-metafield-color">
+                    <span 
+                      class="product-metafield-color-swatch" 
+                      style="background-color: {{ metafield_value.value }}"
+                      title="{{ metafield_value.value }}"
+                    ></span>
+                    <span class="product-metafield-color-value">{{ metafield_value.value }}</span>
+                  </div>
+                {% when 'rating' %}
+                  <div class="product-metafield-rating">
+                    {% assign rating_value = metafield_value.value.value %}
+                    {% assign rating_scale = metafield_value.value.scale_max %}
+                    <div class="rating-stars" aria-label="Rating: {{ rating_value }} out of {{ rating_scale }}">
+                      {% for i in (1..rating_scale) %}
+                        <span class="rating-star{% if i <= rating_value %} rating-star--filled{% endif %}">
+                          {% if i <= rating_value %}★{% else %}☆{% endif %}
+                        </span>
+                      {% endfor %}
+                    </div>
+                    <span class="rating-text">{{ rating_value }}/{{ rating_scale }}</span>
+                  </div>
+                {% else %}
+                  <div class="rte">{{ metafield_value.value }}</div>
+              {% endcase %}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="product-custom-tab-metafields__empty">
+      <p>No additional information available for this product.</p>
+      <small>Configure metafield namespace and keys in the theme editor to display custom product data.</small>
+    </div>
+  {% endif %}
+</div>
+
+<style>
+  .product-custom-tab-metafields {
+    width: 100%;
+  }
+
+  .product-metafields {
+    display: grid;
+    gap: var(--spacing-lg);
+  }
+
+  .product-metafield-item {
+    padding: var(--spacing-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    background-color: var(--color-background);
+  }
+
+  .product-metafield-label {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-foreground);
+    margin: 0 0 var(--spacing-sm) 0;
+    text-transform: capitalize;
+  }
+
+  .product-metafield-value {
+    color: var(--color-foreground-secondary);
+    line-height: 1.5;
+  }
+
+  .product-metafield-value .rte {
+    color: inherit;
+  }
+
+  .product-metafield-list {
+    margin: 0;
+    padding-left: var(--spacing-lg);
+  }
+
+  .product-metafield-list li {
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .product-metafield-boolean {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .product-metafield-boolean--true {
+    color: var(--color-success, #22c55e);
+  }
+
+  .product-metafield-boolean--false {
+    color: var(--color-error, #ef4444);
+  }
+
+  .product-metafield-boolean .svg-wrapper {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .product-metafield-number {
+    font-weight: var(--font-weight-medium);
+    color: var(--color-accent);
+  }
+
+  .product-metafield-json summary {
+    cursor: pointer;
+    color: var(--color-accent);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .product-metafield-json pre {
+    background-color: var(--color-background-secondary);
+    padding: var(--spacing-sm);
+    border-radius: var(--border-radius-sm);
+    overflow-x: auto;
+    font-size: var(--font-size-xs);
+    line-height: 1.4;
+  }
+
+  .product-metafield-color {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+
+  .product-metafield-color-swatch {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    border: 2px solid var(--color-border);
+    flex-shrink: 0;
+  }
+
+  .product-metafield-color-value {
+    font-family: monospace;
+    font-weight: var(--font-weight-medium);
+    text-transform: uppercase;
+  }
+
+  .product-metafield-rating {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+
+  .rating-stars {
+    display: flex;
+    gap: 0.125rem;
+  }
+
+  .rating-star {
+    font-size: 1.25rem;
+    color: var(--color-border);
+  }
+
+  .rating-star--filled {
+    color: var(--color-warning, #f59e0b);
+  }
+
+  .rating-text {
+    font-weight: var(--font-weight-medium);
+    color: var(--color-foreground);
+  }
+
+  .product-metafield-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--border-radius);
+  }
+
+  .product-custom-tab-metafields__empty {
+    text-align: center;
+    padding: var(--spacing-xl);
+    color: var(--color-foreground-secondary);
+  }
+
+  .product-custom-tab-metafields__empty small {
+    display: block;
+    margin-top: var(--spacing-sm);
+    font-size: var(--font-size-xs);
+    color: var(--color-foreground-tertiary);
+  }
+
+  @media screen and (max-width: 749px) {
+    .product-metafield-item {
+      padding: var(--spacing-sm);
+    }
+    
+    .product-metafield-color {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

@@ -2,14 +2,7 @@
 
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
 <div
-  class="
-    section
-    section--{{ section.settings.section_width }}
-    color-{{ section.settings.color_scheme }}
-    section-carousel
-    spacing-style
-    gap-style
-  "
+  class="section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }} section-carousel spacing-style gap-style {{ section.settings.custom_class }} section-{{ section.id }}"
   style="
     {% render 'spacing-style', settings: section.settings %}
     {% render 'gap-style', value: 12 %}
@@ -84,6 +77,13 @@
       "id": "color_scheme",
       "label": "t:settings.color_scheme",
       "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Custom CSS Class",
+      "info": "Add custom CSS classes to this section (space-separated)",
+      "default": "test-class"
     },
     {
       "type": "header",
