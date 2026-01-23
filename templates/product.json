@@ -801,6 +801,55 @@
         "padding-block-end": 32
       }
     },
+    "product_custom_tabs_Anm9t8": {
+      "type": "product-custom-tabs",
+      "blocks": {
+        "tab_content_GWXhhU": {
+          "type": "tab_content",
+          "settings": {
+            "tab_title": "Description",
+            "tab_icon": "none",
+            "content": "<p>Product description and features.</p>"
+          }
+        },
+        "tab_accordion_pMeLJB": {
+          "type": "tab_accordion",
+          "settings": {
+            "tab_title": "Details",
+            "tab_icon": "icon-info",
+            "accordion_icon": "caret",
+            "dividers": true
+          }
+        },
+        "tab_specifications_tfkHbm": {
+          "type": "tab_specifications",
+          "settings": {
+            "tab_title": "Specifications",
+            "tab_icon": "icon-inventory",
+            "show_product_type": true,
+            "show_vendor": true,
+            "show_tags": false,
+            "show_sku": true,
+            "show_barcode": false,
+            "show_weight": true
+          }
+        }
+      },
+      "block_order": [
+        "tab_content_GWXhhU",
+        "tab_accordion_pMeLJB",
+        "tab_specifications_tfkHbm"
+      ],
+      "name": "Product Custom Tabs",
+      "settings": {
+        "heading": "Product Details",
+        "section_width": "page-width",
+        "gap": 16,
+        "color_scheme": "",
+        "padding-block-start": 36,
+        "padding-block-end": 36
+      }
+    },
     "section_NaqU9X": {
       "type": "section",
       "blocks": {
@@ -1391,62 +1440,13 @@
         "padding-block-start": 48,
         "padding-block-end": 48
       }
-    },
-    "product_custom_tabs_Anm9t8": {
-      "type": "product-custom-tabs",
-      "blocks": {
-        "tab_content_GWXhhU": {
-          "type": "tab_content",
-          "settings": {
-            "tab_title": "Description",
-            "tab_icon": "none",
-            "content": "<p>Product description and features.</p>"
-          }
-        },
-        "tab_accordion_pMeLJB": {
-          "type": "tab_accordion",
-          "settings": {
-            "tab_title": "Details",
-            "tab_icon": "icon-info",
-            "accordion_icon": "caret",
-            "dividers": true
-          }
-        },
-        "tab_specifications_tfkHbm": {
-          "type": "tab_specifications",
-          "settings": {
-            "tab_title": "Specifications",
-            "tab_icon": "icon-inventory",
-            "show_product_type": true,
-            "show_vendor": true,
-            "show_tags": false,
-            "show_sku": true,
-            "show_barcode": false,
-            "show_weight": true
-          }
-        }
-      },
-      "block_order": [
-        "tab_content_GWXhhU",
-        "tab_accordion_pMeLJB",
-        "tab_specifications_tfkHbm"
-      ],
-      "name": "Product Custom Tabs",
-      "settings": {
-        "heading": "Product Details",
-        "section_width": "page-width",
-        "gap": 16,
-        "color_scheme": "",
-        "padding-block-start": 36,
-        "padding-block-end": 36
-      }
     }
   },
   "order": [
     "main",
+    "product_custom_tabs_Anm9t8",
     "section_NaqU9X",
     "product_list_zR9Cym",
-    "section_HGf6P3",
-    "product_custom_tabs_Anm9t8"
+    "section_HGf6P3"
   ]
 }
