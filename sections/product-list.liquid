@@ -34,7 +34,11 @@
             class="resource-list__item"
           >
             {% # theme-check-disable UniqueStaticBlockId %}
-              {% content_for 'block', type: '_product-card', id: 'static-product-card', closest.product: product %}
+              {%- if section.settings.show_product_variants -%}
+                {% content_for 'block', type: '_product-card-with-variants', id: 'variant-product-card', closest.product: product %}
+              {%- else -%}
+                {% content_for 'block', type: '_product-card', id: 'static-product-card', closest.product: product %}
+              {%- endif -%}
             {% # theme-check-enable UniqueStaticBlockId %}
           </div>
 
@@ -49,7 +53,11 @@
           class="resource-list__item"
         >
           {% # theme-check-disable UniqueStaticBlockId %}
-            {% content_for 'block', type: '_product-card', id: 'static-product-card', closest.product: null %}
+            {%- if section.settings.show_product_variants -%}
+              {% content_for 'block', type: '_product-card-with-variants', id: 'variant-product-card', closest.product: null %}
+            {%- else -%}
+              {% content_for 'block', type: '_product-card', id: 'static-product-card', closest.product: null %}
+            {%- endif -%}
           {% # theme-check-enable UniqueStaticBlockId %}
         </div>
 
@@ -105,6 +113,17 @@
       "type": "collection",
       "id": "collection",
       "label": "t:settings.collection"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_product_variants",
+      "label": "Show product variants",
+      "default": false,
+      "info": "Display size, color, and other variants on product cards"
+    },
+    {
+      "type": "header",
+      "content": "t:content.cards_layout"
     },
     {
       "type": "select",
@@ -891,3 +910,8 @@
   ]
 }
 {% endschema %}
+
+{%- comment -%} Load variant handling JavaScript for product carousels {%- endcomment -%}
+{%- if section.settings.show_product_variants -%}
+  <script src="{{ 'resource-list-variants.js' | asset_url }}" defer></script>
+{%- endif -%}
