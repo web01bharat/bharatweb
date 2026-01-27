@@ -1199,7 +1199,7 @@
             "accordion_row_H9pryA": {
               "type": "_accordion-row",
               "settings": {
-                "heading": "What is the return policy?{{ closest.product.metafields.custom.faq1.value.question.value }}",
+                "heading": "{{ closest.product.metafields.custom.faq1.value.question.value }}",
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20
@@ -1208,7 +1208,7 @@
                 "text_Ud8yLJ": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>Our goal is for every customer to be totally satisfied with their purchase. If this isn't the case, let us know and we'll do our best to work with you to make it right.</p>",
+                    "text": "<p>{{ metaobjects.faq[\"test-1\"].answer | metafield_tag }}</p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
@@ -1238,7 +1238,7 @@
             "accordion_row_ni9pwq": {
               "type": "_accordion-row",
               "settings": {
-                "heading": "Are any purchases final sale?{{ closest.product.metafields.custom.faq1.value.question.value }}",
+                "heading": "{{ metaobjects.faq[\"test-1\"].question.value }}",
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20
@@ -1247,7 +1247,7 @@
                 "text_cgJPKE": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>We are unable to accept returns on certain items. These will be carefully marked before purchase.</p>",
+                    "text": "<p>{{ metaobjects.faq[\"test-1\"].answer | metafield_tag }}</p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
