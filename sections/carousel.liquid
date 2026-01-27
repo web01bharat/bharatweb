@@ -434,8 +434,3 @@
   ]
 }
 {% endschema %}
-
-{%- comment -%} Load enhanced product carousel JavaScript for product carousels {%- endcomment -%}
-{%- if section.settings.content_type == 'products' -%}
-  <script src="{{ 'product-carousel-enhanced.js' | asset_url }}" defer></script>
-{%- endif -%}
