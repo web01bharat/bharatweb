@@ -1199,7 +1199,7 @@
             "accordion_row_H9pryA": {
               "type": "_accordion-row",
               "settings": {
-                "heading": "What is the return policy?",
+                "heading": "What is the return policy?{{ closest.product.metafields.custom.faq1.value.question.value }}",
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20
