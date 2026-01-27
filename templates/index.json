@@ -551,6 +551,20 @@
               },
               "blocks": {}
             },
+            "swatches_TJzk8e": {
+              "type": "swatches",
+              "name": "t:names.swatches",
+              "settings": {
+                "product_swatches_alignment": "flex-start",
+                "product_swatches_alignment_mobile": "flex-start",
+                "hide_padding": false,
+                "product_swatches_padding_top": 4,
+                "product_swatches_padding_bottom": 0,
+                "product_swatches_padding_left": 0,
+                "product_swatches_padding_right": 0
+              },
+              "blocks": {}
+            },
             "buy_buttons_VBmyH9": {
               "type": "buy-buttons",
               "name": "t:names.product_buy_buttons",
@@ -594,6 +608,7 @@
             "product_title_arNipQ",
             "swatches_TdQqyk",
             "price_YLbNEf",
+            "swatches_TJzk8e",
             "buy_buttons_VBmyH9"
           ]
         }
