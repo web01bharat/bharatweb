@@ -455,6 +455,17 @@
             "product_list_button_cr9pbj"
           ]
         },
+        "variant-product-card": {
+          "type": "_product-card-with-variants",
+          "static": true,
+          "settings": {
+            "product": "",
+            "show_variants": true,
+            "show_quick_add": true,
+            "image_ratio": "adapt"
+          },
+          "blocks": {}
+        },
         "static-product-card": {
           "type": "_product-card",
           "name": "t:names.product_card",
@@ -616,6 +627,7 @@
       "name": "t:names.products_carousel",
       "settings": {
         "collection": "garden",
+        "show_product_variants": true,
         "layout_type": "carousel",
         "carousel_on_mobile": false,
         "max_products": 6,
