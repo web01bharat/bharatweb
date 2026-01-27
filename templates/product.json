@@ -1238,7 +1238,7 @@
             "accordion_row_ni9pwq": {
               "type": "_accordion-row",
               "settings": {
-                "heading": "Are any purchases final sale?",
+                "heading": "Are any purchases final sale?{{ closest.product.metafields.custom.faq1.value.question.value }}",
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20
