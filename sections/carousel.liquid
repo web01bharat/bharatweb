@@ -11,7 +11,11 @@
 >
   {% content_for 'block', type: 'group', id: 'static-header' %}
 
-  {% content_for 'block', type: '_carousel-content', id: 'static-carousel-content', closest.product: null %}
+  {% if section.settings.content_type == 'products' %}
+    {% content_for 'block', type: '_product-carousel-content', id: 'static-product-carousel-content', closest.product: null %}
+  {% else %}
+    {% content_for 'block', type: '_carousel-content', id: 'static-carousel-content', closest.product: null %}
+  {% endif %}
 </div>
 
 {% schema %}
@@ -21,6 +25,23 @@
     "groups": ["header", "footer"]
   },
   "settings": [
+    {
+      "type": "select",
+      "id": "content_type",
+      "label": "Content type",
+      "options": [
+        {
+          "value": "general",
+          "label": "General content"
+        },
+        {
+          "value": "products",
+          "label": "Products with sizes"
+        }
+      ],
+      "default": "general",
+      "info": "Choose 'Products with sizes' to enable size swatches and product-specific features"
+    },
     {
       "type": "range",
       "id": "columns",
@@ -71,6 +92,48 @@
       "step": 1,
       "unit": "px",
       "default": 8
+    },
+    {
+      "type": "select",
+      "id": "product_card_size",
+      "label": "Product card size",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        },
+        {
+          "value": "extra-large",
+          "label": "Extra Large"
+        }
+      ],
+      "default": "medium",
+      "info": "Controls the size of product cards when displaying products",
+      "visible_if": "{{ section.settings.content_type == 'products' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_product_swatches",
+      "label": "Show product size/color swatches",
+      "default": true,
+      "info": "Display variant swatches on product cards",
+      "visible_if": "{{ section.settings.content_type == 'products' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quick_add",
+      "label": "Show quick add button",
+      "default": false,
+      "info": "Display add to cart button on product cards",
+      "visible_if": "{{ section.settings.content_type == 'products' }}"
     },
     {
       "type": "color_scheme",
@@ -168,6 +231,7 @@
       "name": "t:names.carousel",
       "category": "t:categories.storytelling",
       "settings": {
+        "content_type": "general",
         "columns": 3,
         "columns_gap": 12,
         "padding-block-start": 48,
@@ -351,7 +415,27 @@
           "block_order": ["card_1", "card_2", "card_3", "card_4"]
         }
       }
+    },
+    {
+      "name": "Product Carousel with Sizes",
+      "category": "t:categories.storytelling", 
+      "settings": {
+        "content_type": "products",
+        "columns": 4,
+        "mobile_columns": "2",
+        "columns_gap": 16,
+        "product_card_size": "medium",
+        "show_product_swatches": true,
+        "show_quick_add": true,
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      }
     }
   ]
 }
 {% endschema %}
+
+{%- comment -%} Load enhanced product carousel JavaScript for product carousels {%- endcomment -%}
+{%- if section.settings.content_type == 'products' -%}
+  <script src="{{ 'product-carousel-enhanced.js' | asset_url }}" defer></script>
+{%- endif -%}

@@ -81,7 +81,11 @@
       {% capture list_items %}
         {% for product in products limit: section.settings.max_products %}
           <div class="resource-list__item">
-            {% content_for 'block', type: '_product-card', id: 'static-product-card', closest.product: product %}
+            {%- if section.settings.show_product_variants -%}
+              {% content_for 'block', type: '_product-card-with-variants', id: 'variant-product-card', closest.product: product %}
+            {%- else -%}
+              {% content_for 'block', type: '_product-card', id: 'static-product-card', closest.product: product %}
+            {%- endif -%}
           </div>
           {% unless forloop.last %}
             <!--@list/split-->
@@ -449,6 +453,13 @@
       "step": 1,
       "unit": "px",
       "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "show_product_variants",
+      "label": "Show product variants",
+      "default": true,
+      "info": "Display size, color, and other variants on product cards"
     }
   ],
   "presets": [
@@ -559,3 +570,8 @@
   ]
 }
 {% endschema %}
+
+{%- comment -%} Load variant handling JavaScript for product carousels {%- endcomment -%}
+{%- if section.settings.show_product_variants -%}
+  <script src="{{ 'resource-list-variants.js' | asset_url }}" defer></script>
+{%- endif -%}

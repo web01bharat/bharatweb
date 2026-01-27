@@ -20,6 +20,11 @@
     when 'carousel'
       assign classes = 'resource-list--carousel'
   endcase
+
+  # Add script for variants if enabled
+  if block_settings.show_product_variants
+    echo '<script src="' | append: 'resource-list-variants.js' | asset_url | append: '" defer="defer"></script>'
+  endif
 %}
 
 {% comment %}
@@ -85,11 +90,15 @@
       {% capture list_items %}
         {% for product in products limit: block_settings.max_products %}
           <div class="resource-list__item">
-            {% content_for 'block',
-              type: '_product-card',
-              id: 'static-product-card',
-              closest.product: product
-            %}
+            {%- if block_settings.show_product_variants -%}
+              {% content_for 'block', type: '_product-card-with-variants', id: 'variant-product-card', closest.product: product %}
+            {%- else -%}
+              {% content_for 'block',
+                type: '_product-card',
+                id: 'static-product-card',
+                closest.product: product
+              %}
+            {%- endif -%}
           </div>
           {% if block_settings.layout_type == 'carousel' or block_settings.carousel_on_mobile %}
             {% unless forloop.last %}
@@ -425,6 +434,13 @@
       "step": 1,
       "unit": "px",
       "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "show_product_variants",
+      "label": "Show product variants",
+      "default": true,
+      "info": "Display size, color, and other variants on product cards"
     }
   ],
   "presets": [
