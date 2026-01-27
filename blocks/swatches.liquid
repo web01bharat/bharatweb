@@ -2,33 +2,67 @@
 
 {%- liquid
   assign block_settings = block.settings
+  assign product_has_swatches = false
+  assign product_has_variants = false
+  
+  # Check for swatches first
   for product_option in closest.product.options_with_values
     assign swatch_count = product_option.values | map: 'swatch' | compact | size
-
     if swatch_count > 0
       assign product_has_swatches = true
     endif
   endfor
+  
+  # Check for variants (even without swatches)
+  if closest.product.variants.size > 1
+    assign product_has_variants = true
+  endif
 -%}
 
-{% if product_has_swatches %}
-  <product-swatches
-    data-product-id="{{ closest.product.id }}"
-    data-product-url="{{ closest.product.url }}"
-    style="
-      --overflow-list-alignment: {{ block_settings.product_swatches_alignment }};
-      --overflow-list-alignment-mobile: {{ block_settings.product_swatches_alignment_mobile }};
-      --product-swatches-alignment: {% if block_settings.product_swatches_alignment == 'flex-start' %}start{% elsif block_settings.product_swatches_alignment == 'flex-end' %}end{% else %}center{% endif %};
-      --product-swatches-alignment-mobile: {% if block_settings.product_swatches_alignment_mobile == 'flex-start' %}start{% elsif block_settings.product_swatches_alignment_mobile == 'flex-end' %}end{% else %}center{% endif %};
-      --product-swatches-padding-block-start: {{ block_settings.product_swatches_padding_top }}px;
-      --product-swatches-padding-block-end: {{ block_settings.product_swatches_padding_bottom }}px;
-      --product-swatches-padding-inline-start: {{ block_settings.product_swatches_padding_left }}px;
-      --product-swatches-padding-inline-end: {{ block_settings.product_swatches_padding_right }}px;
-    "
-    {{ block.shopify_attributes }}
-  >
-    {% render 'variant-swatches', product_resource: closest.product %}
-  </product-swatches>
+{% if product_has_swatches or product_has_variants %}
+  {%- if product_has_swatches -%}
+    <product-swatches
+      data-product-id="{{ closest.product.id }}"
+      data-product-url="{{ closest.product.url }}"
+      style="
+        --overflow-list-alignment: {{ block_settings.product_swatches_alignment }};
+        --overflow-list-alignment-mobile: {{ block_settings.product_swatches_alignment_mobile }};
+        --product-swatches-alignment: {% if block_settings.product_swatches_alignment == 'flex-start' %}start{% elsif block_settings.product_swatches_alignment == 'flex-end' %}end{% else %}center{% endif %};
+        --product-swatches-alignment-mobile: {% if block_settings.product_swatches_alignment_mobile == 'flex-start' %}start{% elsif block_settings.product_swatches_alignment_mobile == 'flex-end' %}end{% else %}center{% endif %};
+        --product-swatches-padding-block-start: {{ block_settings.product_swatches_padding_top }}px;
+        --product-swatches-padding-block-end: {{ block_settings.product_swatches_padding_bottom }}px;
+        --product-swatches-padding-inline-start: {{ block_settings.product_swatches_padding_left }}px;
+        --product-swatches-padding-inline-end: {{ block_settings.product_swatches_padding_right }}px;
+      "
+      {{ block.shopify_attributes }}
+    >
+      {% render 'variant-swatches', product_resource: closest.product %}
+    </product-swatches>
+  {%- else -%}
+    {%- comment -%} Show basic variant options when no swatches are configured {%- endcomment -%}
+    <div class="basic-variants" 
+         style="
+           --product-swatches-padding-block-start: {{ block_settings.product_swatches_padding_top }}px;
+           --product-swatches-padding-block-end: {{ block_settings.product_swatches_padding_bottom }}px;
+           --product-swatches-padding-inline-start: {{ block_settings.product_swatches_padding_left }}px;
+           --product-swatches-padding-inline-end: {{ block_settings.product_swatches_padding_right }}px;
+         "
+         {{ block.shopify_attributes }}>
+      {%- for option in closest.product.options_with_values limit: 1 -%}
+        <div class="basic-variant-option">
+          <span class="variant-option-name hidden">{{ option.name }}:</span>
+          <div class="variant-option-values">
+            {%- for value in option.values limit: 4 -%}
+              <span class="variant-value">{{ value }}</span>{%- unless forloop.last -%} {% endunless %}
+            {%- endfor -%}
+            {%- if option.values.size > 4 -%}
+              <span class="variant-more">+{{ option.values.size | minus: 4 }} more</span>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
 {% endif %}
 
 {% # theme-check-disable %}
@@ -95,6 +129,42 @@
 
   .hidden-swatches__count:hover {
     color: var(--color-foreground-rgb);
+  }
+
+  .basic-variants {
+    display: flex;
+    width: 100%;
+    padding-block-start: var(--product-swatches-padding-block-start);
+    padding-block-end: var(--product-swatches-padding-block-end);
+    padding-inline-start: var(--product-swatches-padding-inline-start);
+    padding-inline-end: var(--product-swatches-padding-inline-end);
+  }
+
+  .basic-variant-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  .variant-option-name {
+    font-weight: 500;
+    color: rgb(var(--color-foreground));
+  }
+
+  .variant-option-values {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .variant-value {
+    color: rgb(var(--color-foreground) / 0.8);
+  }
+
+  .variant-more {
+    color: rgb(var(--color-foreground) / 0.6);
+    font-style: italic;
   }
 {% endstylesheet %}
 
