@@ -459,7 +459,7 @@
           "type": "_product-card-with-variants",
           "static": true,
           "settings": {
-            "product": "",
+            "product": "example-hat",
             "show_variants": true,
             "show_quick_add": true,
             "image_ratio": "adapt"
