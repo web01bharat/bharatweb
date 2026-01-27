@@ -455,17 +455,6 @@
             "product_list_button_cr9pbj"
           ]
         },
-        "variant-product-card": {
-          "type": "_product-card-with-variants",
-          "static": true,
-          "settings": {
-            "product": "example-hat",
-            "show_variants": true,
-            "show_quick_add": true,
-            "image_ratio": "adapt"
-          },
-          "blocks": {}
-        },
         "static-product-card": {
           "type": "_product-card",
           "name": "t:names.product_card",
@@ -835,17 +824,6 @@
             "padding-block-end": 0,
             "padding-inline-start": 0,
             "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "variant-product-card": {
-          "type": "_product-card-with-variants",
-          "static": true,
-          "settings": {
-            "product": "",
-            "show_variants": true,
-            "show_quick_add": true,
-            "image_ratio": "adapt"
           },
           "blocks": {}
         },
