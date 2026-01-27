@@ -1424,7 +1424,7 @@
         "section_width": "page-width",
         "section_height": "",
         "section_height_custom": 50,
-        "custom_class": "",
+        "custom_class": "{{ metaobjects.faq[\"test-1\"].question.value }}",
         "color_scheme": "",
         "background_media": "none",
         "video_position": "cover",
