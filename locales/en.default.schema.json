@@ -1222,6 +1222,11 @@
     "collapsible_content_title": "Collapsible content"
   },
   "sections": {
+    "all": {
+      "heading_size": {
+        "label": "Heading size"
+      }
+    },
     "collapsible_content": {
       "name": "Collapsible content",
       "settings": {
@@ -1246,6 +1251,9 @@
         },
         "layout_header": {
           "content": "Layout"
+        },
+        "header": {
+          "content": "Header"
         },
         "layout": {
           "label": "Layout",
@@ -1398,6 +1406,26 @@
         },
         "border_radius": {
           "label": "Border radius"
+        }
+      },
+      "blocks": {
+        "collapsible_row": {
+          "name": "Collapsible row",
+          "settings": {
+            "heading": {
+              "label": "Heading",
+              "default": "Collapsible row"
+            },
+            "icon": {
+              "label": "Icon"
+            },
+            "row_content": {
+              "label": "Row content"
+            },
+            "page": {
+              "label": "Page"
+            }
+          }
         }
       },
       "presets": {
