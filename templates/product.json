@@ -1181,7 +1181,7 @@
           "type": "accordion",
           "name": "t:names.accordion",
           "settings": {
-            "icon": "caret",
+            "icon": "plus",
             "dividers": true,
             "type_preset": "h5",
             "inherit_color_scheme": true,
@@ -1199,8 +1199,8 @@
             "accordion_row_9yJ6fT": {
               "type": "_accordion-row",
               "settings": {
-                "heading": "What is the return policy?{{ closest.product.metafields.custom.faq_info.value.question.value }}",
-                "open_by_default": false,
+                "heading": "{{ product.metafields.custom.product_faq.value.question.value }}",
+                "open_by_default": true,
                 "icon": "none",
                 "width": 20
               },
@@ -1208,7 +1208,7 @@
                 "text_xi7jzr": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>Our goal is for every customer to be totally satisfied with their purchase. If this isn't the case, let us know and we'll do our best to work with you to make it right.{{ closest.product.metafields.custom.faq_info.value.anaswer | metafield_tag }}</p>",
+                    "text": "{{ product.metafields.custom.product_faq.value.ans | metafield_tag }}",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
@@ -1258,7 +1258,7 @@
         "section_width": "page-width",
         "section_height": "",
         "section_height_custom": 50,
-        "custom_class": "",
+        "custom_class": "{{ product.metafields.custom.product_faq.value.question.value }}",
         "color_scheme": "",
         "background_media": "none",
         "video_position": "cover",
