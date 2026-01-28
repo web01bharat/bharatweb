@@ -443,6 +443,7 @@
     "arrow": "Arrow",
     "arrows": "Arrows",
     "arrows_large": "Large arrows",
+    "article_content": "Article content",
     "aspect_ratio": "Aspect ratio",
     "auto": "Auto",
     "balance": "Balance",
@@ -450,6 +451,8 @@
     "below_image": "Below image",
     "bento": "Bento",
     "black": "Black",
+    "blocks": "Blocks",
+    "blocks_default": "Blocks (Default)",
     "bluesky": "Bluesky",
     "blur": "Blur",
     "body": "Body",
@@ -495,10 +498,11 @@
     "cover": "Cover",
     "crop_to_fit": "Crop to fit",
     "custom": "Custom",
-    // Icon option representing dairy products
+    "custom_content": "Custom content",
     "dairy": "Dairy",
     // Icon option for dietary restriction indication
     "dairy_free": "Dairy free",
+    "dynamic_metafield": "Dynamic metafield",
     "default": "Default",
     "diamond": "Diamond",
     "dissolve": "Dissolve",
@@ -619,6 +623,7 @@
     // Star rating style showing empty star outlines
     "outline": "Outline",
     "page": "Page",
+    "page_content": "Page content",
     "page_center_aligned": "Page, center aligned",
     "page_left_aligned": "Page, left aligned",
     "page_right_aligned": "Page, right aligned",
@@ -817,6 +822,7 @@
     "columns": "Columns",
     // Layout container block name for grouping other blocks
     "content": "Content",
+    "content_type": "Content type",
     "content_alignment": "Content alignment",
     "content_direction": "Content direction",
     "content_position": "Content position",
@@ -833,6 +839,7 @@
     "custom_mobile_width": "Custom mobile width",
     "custom_width": "Custom width",
     "custom_liquid": "Liquid code",
+    "custom_content": "Custom content",
     // Primary color scheme option, not specialized variants
     "default": "Default",
     "default_logo": "Default logo",
@@ -956,6 +963,8 @@
     "media_type": "Media type",
     "media_width": "Media width",
     "menu": "Menu",
+    "metafield_namespace": "Metafield namespace",
+    "metafield_key": "Metafield key",
     "minimum_height": "Minimum height",
     "mobile_card_size": "Mobile card size",
     "mobile_columns": "Mobile columns",
@@ -1208,5 +1217,190 @@
     "what_is_return_policy": "What is the return policy?",
     "when_will_order_arrive": "When will I get my order?",
     "where_are_products_made": "Where are your products manufactured?"
+  },
+  "accessibility": {
+    "collapsible_content_title": "Collapsible content"
+  },
+  "sections": {
+    "collapsible_content": {
+      "name": "Collapsible content",
+      "settings": {
+        "caption": {
+          "label": "Caption"
+        },
+        "heading": {
+          "label": "Heading"
+        },
+        "heading_alignment": {
+          "label": "Heading alignment",
+          "options__1": {
+            "label": "Left"
+          },
+          "options__2": {
+            "label": "Center"
+          },
+          "options__3": {
+            "label": "Right"
+          }
+        },
+        "layout_header": {
+          "content": "Layout"
+        },
+        "layout": {
+          "label": "Layout",
+          "options__1": {
+            "label": "None"
+          },
+          "options__2": {
+            "label": "Row"
+          },
+          "options__3": {
+            "label": "Section"
+          }
+        },
+        "container_color_scheme": {
+          "label": "Container color scheme"
+        },
+        "section_color_scheme": {
+          "label": "Section color scheme"
+        },
+        "open_first_collapsible_row": {
+          "label": "Open first row by default"
+        },
+        "image": {
+          "label": "Image"
+        },
+        "image_ratio": {
+          "label": "Image ratio"
+        },
+        "desktop_layout": {
+          "label": "Desktop layout"
+        },
+        "padding_top": {
+          "label": "Top padding"
+        },
+        "padding_bottom": {
+          "label": "Bottom padding"
+        }
+      },
+      "blocks": {
+        "collapsible_row": {
+          "name": "Collapsible row",
+          "settings": {
+            "heading": {
+              "label": "Heading"
+            },
+            "icon": {
+              "label": "Icon",
+              "options__1": { "label": "Apple" },
+              "options__2": { "label": "Banana" },
+              "options__3": { "label": "Bottle" },
+              "options__4": { "label": "Box" },
+              "options__5": { "label": "Carrot" },
+              "options__6": { "label": "Chat bubble" },
+              "options__7": { "label": "Check mark" },
+              "options__8": { "label": "Clipboard" },
+              "options__9": { "label": "Dairy" },
+              "options__10": { "label": "Dairy free" },
+              "options__11": { "label": "Dryer" },
+              "options__12": { "label": "Eye" },
+              "options__13": { "label": "Fire" },
+              "options__14": { "label": "Gluten free" },
+              "options__15": { "label": "Heart" },
+              "options__16": { "label": "Iron" },
+              "options__17": { "label": "Leaf" },
+              "options__18": { "label": "Leather" },
+              "options__19": { "label": "Lightning bolt" },
+              "options__20": { "label": "Lipstick" },
+              "options__21": { "label": "Lock" },
+              "options__22": { "label": "Map pin" },
+              "options__23": { "label": "Nut free" },
+              "options__24": { "label": "Pants" },
+              "options__25": { "label": "Paw print" },
+              "options__26": { "label": "Pepper" },
+              "options__27": { "label": "Perfume" },
+              "options__28": { "label": "Plane" },
+              "options__29": { "label": "Plant" },
+              "options__30": { "label": "Price tag" },
+              "options__31": { "label": "Question mark" },
+              "options__32": { "label": "Recycle" },
+              "options__33": { "label": "Return" },
+              "options__34": { "label": "Ruler" },
+              "options__35": { "label": "Serving dish" },
+              "options__36": { "label": "Shirt" },
+              "options__37": { "label": "Shoe" },
+              "options__38": { "label": "Silhouette" },
+              "options__39": { "label": "Snowflake" },
+              "options__40": { "label": "Star" },
+              "options__41": { "label": "Stopwatch" },
+              "options__42": { "label": "Truck" },
+              "options__43": { "label": "Washing" }
+            },
+            "row_content": {
+              "label": "Row content"
+            },
+            "page": {
+              "label": "Page"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "Collapsible content"
+      }
+    },
+    "faq": {
+      "name": "FAQ Accordion",
+      "settings": {
+        "heading": {
+          "label": "Section heading"
+        },
+        "heading_tag": {
+          "label": "Heading tag"
+        },
+        "heading_size": {
+          "label": "Heading size"
+        },
+        "subheading": {
+          "label": "Subheading"
+        },
+        "icon": {
+          "label": "Accordion icon"
+        },
+        "dividers": {
+          "label": "Show dividers"
+        },
+        "type_preset": {
+          "label": "Question text style"
+        },
+        "inherit_color_scheme": {
+          "label": "Inherit color scheme"
+        },
+        "color_scheme": {
+          "label": "Color scheme"
+        },
+        "padding_top": {
+          "label": "Top padding"
+        },
+        "padding_bottom": {
+          "label": "Bottom padding"
+        },
+        "border": {
+          "label": "Style"
+        },
+        "border_width": {
+          "label": "Thickness"
+        },
+        "border_opacity": {
+          "label": "Opacity"
+        },
+        "border_radius": {
+          "label": "Border radius"
+        }
+      },
+      "presets": {
+        "name": "FAQ Accordion"
+      }
+    }
   }
 }
