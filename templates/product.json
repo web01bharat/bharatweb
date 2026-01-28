@@ -1286,6 +1286,16 @@
             "content": "<p>Product description and features.</p>"
           }
         },
+        "tab_accordion_gjb8mk": {
+          "type": "tab_accordion",
+          "disabled": true,
+          "settings": {
+            "tab_title": "Details",
+            "tab_icon": "icon-info",
+            "accordion_icon": "caret",
+            "dividers": true
+          }
+        },
         "tab_metafields_QNPBBQ": {
           "type": "tab_metafields",
           "settings": {
@@ -1295,14 +1305,13 @@
             "metafield_keys": ""
           }
         },
-        "tab_accordion_gjb8mk": {
-          "type": "tab_accordion",
-          "disabled": true,
+        "tab_metafields_kRpEjz": {
+          "type": "tab_metafields",
           "settings": {
-            "tab_title": "Details",
-            "tab_icon": "icon-info",
-            "accordion_icon": "caret",
-            "dividers": true
+            "tab_title": "{{ product.metafields.custom.warranty.value }}",
+            "tab_icon": "icon-external",
+            "metafield_namespace": "{{ product.metafields.custom.warranty.value }}",
+            "metafield_keys": ""
           }
         },
         "tab_specifications_jYwEeG": {
@@ -1321,8 +1330,9 @@
       },
       "block_order": [
         "tab_content_nPFiyn",
-        "tab_metafields_QNPBBQ",
         "tab_accordion_gjb8mk",
+        "tab_metafields_QNPBBQ",
+        "tab_metafields_kRpEjz",
         "tab_specifications_jYwEeG"
       ],
       "name": "Product Custom Tabs",
