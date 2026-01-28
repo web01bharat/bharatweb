@@ -1172,8 +1172,50 @@
     "x_position": "Horizontal position",
     "y_position": "Vertical position"
   },
-
-    "collapsible_content": {
+  "text_defaults": {
+    "accordion_heading": "Accordion heading",
+    "are_purchases_final_sale": "Are any purchases final sale?",
+    "be_bold": "Be bold.",
+    "bestsellers": "Bestsellers",
+    "button_label": "Shop now",
+    "care_instructions": "Care instructions",
+    "cart": "Cart",
+    "collapsible_row": "Collapsible row",
+    "contact_form_button_label": "Submit",
+    "discover_collection": "Discover the collection",
+    "email_signup_button_label": "Subscribe",
+    "featured_collection": "Featured collection",
+    "fit": "fit",
+    "heading": "Heading",
+    "how_much_for_shipping": "How much does shipping cost?",
+    "learn_more": "Learn more",
+    "manufacturing": "Manufacturing",
+    "materials": "Materials",
+    "new_arrivals": "New arrivals",
+    "popup_link": "Popup link",
+    "return_policy": "Return policy",
+    "shipping": "Shipping",
+    "shop_now_button_label": "Shop now",
+    "shop_our_latest_arrivals": "Shop our latest arrivals!",
+    "shop_the_look": "Shop the look",
+    "sign_up_button_label": "Sign up",
+    "sign_up": "Sign up",
+    "submit_button_label": "Submit",
+    "trending_now": "Trending now",
+    "up_the_ante": "Up\nThe\nAnte",
+    "view_all_button_label": "View all",
+    "welcome_to_our_store": "Welcome to our store",
+    "what_is_return_policy": "What is the return policy?",
+    "when_will_order_arrive": "When will I get my order?",
+    "where_are_products_made": "Where are your products manufactured?"
+  },
+  "collapsible_tab": {
+          "name": "Collapsible row",
+          "settings": {}
+  },
+  "settings_schema": {
+    "sections": {
+      "collapsible_content": {
       "name": "Collapsible content",
       "settings": {
         "caption": {
@@ -1402,42 +1444,7 @@
       "presets": {
         "name": "Collapsible content"
       }
-    },
-  "text_defaults": {
-    "accordion_heading": "Accordion heading",
-    "are_purchases_final_sale": "Are any purchases final sale?",
-    "be_bold": "Be bold.",
-    "bestsellers": "Bestsellers",
-    "button_label": "Shop now",
-    "care_instructions": "Care instructions",
-    "cart": "Cart",
-    "collapsible_row": "Collapsible row",
-    "contact_form_button_label": "Submit",
-    "discover_collection": "Discover the collection",
-    "email_signup_button_label": "Subscribe",
-    "featured_collection": "Featured collection",
-    "fit": "fit",
-    "heading": "Heading",
-    "how_much_for_shipping": "How much does shipping cost?",
-    "learn_more": "Learn more",
-    "manufacturing": "Manufacturing",
-    "materials": "Materials",
-    "new_arrivals": "New arrivals",
-    "popup_link": "Popup link",
-    "return_policy": "Return policy",
-    "shipping": "Shipping",
-    "shop_now_button_label": "Shop now",
-    "shop_our_latest_arrivals": "Shop our latest arrivals!",
-    "shop_the_look": "Shop the look",
-    "sign_up_button_label": "Sign up",
-    "sign_up": "Sign up",
-    "submit_button_label": "Submit",
-    "trending_now": "Trending now",
-    "up_the_ante": "Up\nThe\nAnte",
-    "view_all_button_label": "View all",
-    "welcome_to_our_store": "Welcome to our store",
-    "what_is_return_policy": "What is the return policy?",
-    "when_will_order_arrive": "When will I get my order?",
-    "where_are_products_made": "Where are your products manufactured?"
+    }
+    }
   }
 }
