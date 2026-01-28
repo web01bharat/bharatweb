@@ -1274,6 +1274,66 @@
         "padding-block-start": 48,
         "padding-block-end": 48
       }
+    },
+    "product_custom_tabs_yYEBRq": {
+      "type": "product-custom-tabs",
+      "blocks": {
+        "tab_content_nPFiyn": {
+          "type": "tab_content",
+          "settings": {
+            "tab_title": "Description",
+            "tab_icon": "none",
+            "content": "<p>Product description and features.</p>"
+          }
+        },
+        "tab_metafields_QNPBBQ": {
+          "type": "tab_metafields",
+          "settings": {
+            "tab_title": "Additional Info{{ product.metafields.custom.dimensions.value }}",
+            "tab_icon": "icon-external",
+            "metafield_namespace": "{{ product.metafields.custom.dimensions.value }}",
+            "metafield_keys": ""
+          }
+        },
+        "tab_accordion_gjb8mk": {
+          "type": "tab_accordion",
+          "disabled": true,
+          "settings": {
+            "tab_title": "Details",
+            "tab_icon": "icon-info",
+            "accordion_icon": "caret",
+            "dividers": true
+          }
+        },
+        "tab_specifications_jYwEeG": {
+          "type": "tab_specifications",
+          "settings": {
+            "tab_title": "Specifications",
+            "tab_icon": "icon-inventory",
+            "show_product_type": true,
+            "show_vendor": true,
+            "show_tags": false,
+            "show_sku": true,
+            "show_barcode": false,
+            "show_weight": true
+          }
+        }
+      },
+      "block_order": [
+        "tab_content_nPFiyn",
+        "tab_metafields_QNPBBQ",
+        "tab_accordion_gjb8mk",
+        "tab_specifications_jYwEeG"
+      ],
+      "name": "Product Custom Tabs",
+      "settings": {
+        "heading": "Product Details",
+        "section_width": "page-width",
+        "gap": 16,
+        "color_scheme": "",
+        "padding-block-start": 36,
+        "padding-block-end": 36
+      }
     }
   },
   "order": [
@@ -1281,6 +1341,7 @@
     "product_custom_tabs_Anm9t8",
     "section_NaqU9X",
     "product_list_zR9Cym",
-    "section_zJPEbG"
+    "section_zJPEbG",
+    "product_custom_tabs_yYEBRq"
   ]
 }
