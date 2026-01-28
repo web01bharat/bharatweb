@@ -1229,7 +1229,8 @@
           "label": "Caption"
         },
         "heading": {
-          "label": "Heading"
+          "label": "Heading",
+          "default": "Collapsible content"
         },
         "heading_alignment": {
           "label": "Heading alignment",
@@ -1288,7 +1289,8 @@
           "name": "Collapsible row",
           "settings": {
             "heading": {
-              "label": "Heading"
+              "label": "Heading",
+              "default": "Collapsible row"
             },
             "icon": {
               "label": "Icon",
