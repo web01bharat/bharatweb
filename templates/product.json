@@ -1279,7 +1279,7 @@
             "accordion_row_9yJ6fT": {
               "type": "_accordion-row",
               "settings": {
-                "heading": "{{ closest.product.metafields.custom.product_faq.value.question.value }}",
+                "heading": "{{ closest.product.metafields.custom.faq_info.value.question.value }}",
                 "open_by_default": true,
                 "icon": "none",
                 "width": 20
