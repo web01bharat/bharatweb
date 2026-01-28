@@ -1,0 +1,94 @@
+{%- doc -%}
+  Renders an accordion row block.
+
+  @param {object} block - The block object containing settings and content.
+
+  @example
+  {% render '_accordion-row', block: block %}
+{%- enddoc -%}
+
+{% assign block_settings = block.settings %}
+
+<accordion-custom
+  {% if block_settings.open_by_default %}
+    open-by-default-on-desktop
+    open-by-default-on-mobile
+  {% endif %}
+>
+  <details
+    class="details"
+    data-testid="accordion-details"
+    {% if block_settings.open_by_default %}
+      open
+    {% endif %}
+    {{ block.shopify_attributes }}
+  >
+    <summary class="details__header">
+      {% render 'icon-or-image',
+        icon: block_settings.icon,
+        image_upload: block_settings.image_upload,
+        width: block_settings.width,
+        class_name: 'details__icon'
+      %}
+      {{ block_settings.heading }}
+      <span class="svg-wrapper icon-caret icon-animated">
+        {{- 'icon-caret.svg' | inline_asset_content -}}
+      </span>
+      <span class="svg-wrapper icon-plus">
+        {{- 'icon-plus.svg' | inline_asset_content -}}
+      </span>
+    </summary>
+
+    <div class="details-content">
+      {% if block_settings.content_type == 'custom' and block_settings.custom_content != blank %}
+        <div class="rte">{{ block_settings.custom_content }}</div>
+      {% elsif block_settings.content_type == 'metafield' and block_settings.metafield_namespace != blank and block_settings.metafield_key != blank %}
+        {%- liquid
+          assign namespace = block_settings.metafield_namespace
+          assign key = block_settings.metafield_key
+        -%}
+        {% if product and product.metafields[namespace][key] != blank %}
+          <div class="rte">{{ product.metafields[namespace][key].value }}</div>
+        {% elsif page and page.metafields[namespace][key] != blank %}
+          <div class="rte">{{ page.metafields[namespace][key].value }}</div>
+        {% elsif blog and blog.metafields[namespace][key] != blank %}
+          <div class="rte">{{ blog.metafields[namespace][key].value }}</div>
+        {% elsif article and article.metafields[namespace][key] != blank %}
+          <div class="rte">{{ article.metafields[namespace][key].value }}</div>
+        {% elsif shop.metafields[namespace][key] != blank %}
+          <div class="rte">{{ shop.metafields[namespace][key].value }}</div>
+        {% else %}
+          <p>No information available.</p>
+        {% endif %}
+      {% elsif block_settings.content_type == 'product_description' and product %}
+        {% if product.description != blank %}
+          <div class="rte">{{ product.description }}</div>
+        {% else %}
+          <p>No product description available.</p>
+        {% endif %}
+      {% elsif block_settings.content_type == 'page_content' and page %}
+        {% if page.content != blank %}
+          <div class="rte">{{ page.content }}</div>
+        {% else %}
+          <p>No page content available.</p>
+        {% endif %}
+      {% elsif block_settings.content_type == 'article_content' and article %}
+        {% if article.content != blank %}
+          <div class="rte">{{ article.content }}</div>
+        {% else %}
+          <p>No article content available.</p>
+        {% endif %}
+      {% else %}
+        {%- comment -%} Default to blocks content for backward compatibility {%- endcomment -%}
+        {% content_for 'blocks' %}
+      {% endif %}
+    </div>
+  </details>
+</accordion-custom>
+
+{% stylesheet %}
+  .details__icon {
+    height: auto;
+    margin-inline-end: var(--margin-xs);
+  }
+{% endstylesheet %}

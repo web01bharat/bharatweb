@@ -1,0 +1,349 @@
+{% comment %}
+  FAQ Section with Dynamic Resource Support
+  This section allows creating FAQ accordions with dynamic content from metafields, pages, or custom content
+{% endcomment %}
+
+{%- liquid
+  assign section_settings = section.settings
+-%}
+
+<div 
+  class="faq-section page-width"
+  style="
+    padding-block: {{ section_settings.padding_top }}px {{ section_settings.padding_bottom }}px;
+  "
+>
+  {% if section_settings.heading != blank %}
+    <div class="faq-section__header">
+      <{{ section_settings.heading_tag | default: 'h2' }} class="faq-section__heading {{ section_settings.heading_size }}">
+        {{ section_settings.heading | escape }}
+      </{{ section_settings.heading_tag | default: 'h2' }}>
+      
+      {% if section_settings.subheading != blank %}
+        <div class="faq-section__subheading rte">
+          {{ section_settings.subheading }}
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div 
+    class="faq-accordion accordion accordion--{{ section.id }} accordion--{{ section_settings.icon }} border-style spacing-style{% if section_settings.inherit_color_scheme == false %} color-{{ section_settings.color_scheme }}{% endif %}{% if section_settings.dividers %} accordion--dividers{% endif %}"
+    style="
+      --summary-font-family: var(--font-{{ section_settings.type_preset }}--family);
+      --summary-font-style: var(--font-{{ section_settings.type_preset }}--style);
+      --summary-font-weight: var(--font-{{ section_settings.type_preset }}--weight);
+      --summary-font-size: var(--font-{{ section_settings.type_preset }}--size);
+      --summary-font-line-height: var(--font-{{ section_settings.type_preset }}--line-height);
+      --summary-font-case: var(--font-{{ section_settings.type_preset }}--case);
+      {% render 'spacing-style', settings: section_settings %}
+      {% render 'border-override', settings: section_settings %}
+    "
+  >
+    {% content_for 'blocks' %}
+  </div>
+</div>
+
+{% stylesheet %}
+  .faq-section {
+    margin: 0 auto;
+  }
+
+  .faq-section__header {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .faq-section__heading {
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .faq-section__subheading {
+    color: var(--color-foreground-75);
+  }
+
+  .faq-accordion {
+    flex: 1;
+    width: 100%;
+  }
+
+  .faq-accordion--dividers accordion-custom:not(:first-child) .details {
+    border-block-start: var(--style-border-width) solid var(--color-border);
+  }
+
+  /* When accordion borders are not set, show fallback borders */
+  .faq-accordion--dividers {
+    /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+    --show-fallback-borders: 0;
+  }
+
+  .faq-accordion--dividers:not([class*='color-'])[style*='--border-width: 0'],
+  .faq-accordion--dividers:not([class*='color-'])[style*='--border-style: none'] {
+    --show-fallback-borders: 1;
+  }
+
+  .faq-accordion--dividers accordion-custom:first-child .details {
+    border-block-start: calc(var(--style-border-width) * var(--show-fallback-borders)) solid var(--color-border);
+  }
+
+  .faq-accordion--dividers accordion-custom:last-child .details {
+    border-block-end: calc(var(--style-border-width) * var(--show-fallback-borders)) solid var(--color-border);
+  }
+
+  .faq-accordion--dividers .details-content {
+    padding-block-end: var(--padding-sm);
+  }
+
+  .faq-accordion--caret .icon-plus,
+  .faq-accordion--plus .icon-caret {
+    display: none;
+  }
+
+  /* because we can't pass apply a specific class on a block based on its parent block setting */
+  .faq-accordion .details__header {
+    font-family: var(--summary-font-family);
+    font-style: var(--summary-font-style);
+    font-weight: var(--summary-font-weight);
+    font-size: var(--summary-font-size);
+    line-height: var(--summary-font-line-height);
+    text-transform: var(--summary-font-case);
+    min-height: var(--minimum-touch-target);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "FAQ Accordion",
+  "tag": "section",
+  "class": "faq-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Heading Tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "H1"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        },
+        {
+          "value": "h4",
+          "label": "H4"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading Size",
+      "options": [
+        {
+          "value": "h1",
+          "label": "Large"
+        },
+        {
+          "value": "h2",
+          "label": "Medium"
+        },
+        {
+          "value": "h3",
+          "label": "Small"
+        }
+      ],
+      "default": "h2"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "select",
+      "id": "icon",
+      "label": "Accordion Icon",
+      "options": [
+        {
+          "value": "caret",
+          "label": "Caret"
+        },
+        {
+          "value": "plus",
+          "label": "Plus"
+        }
+      ],
+      "default": "caret"
+    },
+    {
+      "type": "checkbox",
+      "id": "dividers",
+      "label": "Show Dividers",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "type_preset",
+      "label": "Question Text Style",
+      "options": [
+        {
+          "value": "",
+          "label": "Default"
+        },
+        {
+          "value": "paragraph",
+          "label": "Paragraph"
+        },
+        {
+          "value": "h1",
+          "label": "H1"
+        },
+        {
+          "value": "h2",
+          "label": "H2"
+        },
+        {
+          "value": "h3",
+          "label": "H3"
+        },
+        {
+          "value": "h4",
+          "label": "H4"
+        },
+        {
+          "value": "h5",
+          "label": "H5"
+        },
+        {
+          "value": "h6",
+          "label": "H6"
+        }
+      ],
+      "default": "h6",
+      "info": "Edit presets in theme settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "inherit_color_scheme",
+      "label": "Inherit Color Scheme",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color Scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Borders"
+    },
+    {
+      "type": "select",
+      "id": "border",
+      "label": "Style",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "solid",
+          "label": "Solid"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Thickness",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "border_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Opacity",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border Radius",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "accordion_row",
+      "name": "FAQ Row",
+      "limit": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Accordion",
+      "category": "Content",
+      "blocks": [
+        {
+          "type": "accordion_row"
+        },
+        {
+          "type": "accordion_row"
+        },
+        {
+          "type": "accordion_row"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
