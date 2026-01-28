@@ -1236,7 +1236,7 @@
         },
         "heading": {
           "label": "Heading",
-          "default": "Collapsible content"
+          "default": "t:text_defaults.collapsible_content"
         },
         "heading_alignment": {
           "label": "Heading alignment",
