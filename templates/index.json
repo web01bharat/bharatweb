@@ -1243,11 +1243,10 @@
       "blocks": {
         "collapsible_row_FjmjYN": {
           "type": "collapsible_row",
+          "source": "{{ metaobjects.product_faq.bharat }}",
           "settings": {
-            "heading": "missing translation: \"t:sections.collapsible_content.blocks.collapsible_row.settings.heading.default\"",
-            "icon": "check_mark",
-            "row_content": "",
-            "page": ""
+            "heading": "{{ metaobjects.product_faq.bharat.question.value }}",
+            "row_content": "{{ metaobjects.product_faq.bharat.ans | metafield_tag }}"
           }
         },
         "collapsible_row_MfqQ4M": {
