@@ -1196,10 +1196,90 @@
             "padding-inline-end": 0
           },
           "blocks": {
+            "accordion_row_a9dcKH": {
+              "type": "_accordion-row",
+              "name": "t:names.accordion_row",
+              "settings": {
+                "heading": "When will I get my order?",
+                "open_by_default": false,
+                "icon": "none",
+                "width": 20
+              },
+              "blocks": {
+                "text_qkfd3C": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>We will work quickly to ship your order as soon as possible. Once your order has shipped, you will receive an email with further information. Delivery times vary depending on your location.</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "rte",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "var(--color-foreground)",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_qkfd3C"
+              ]
+            },
+            "accordion_row_Mmmck9": {
+              "type": "_accordion-row",
+              "name": "t:names.accordion_row",
+              "settings": {
+                "heading": "When will I get my order?",
+                "open_by_default": false,
+                "icon": "none",
+                "width": 20
+              },
+              "blocks": {
+                "text_thWyca": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>We will work quickly to ship your order as soon as possible. Once your order has shipped, you will receive an email with further information. Delivery times vary depending on your location.</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "rte",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "var(--color-foreground)",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_thWyca"
+              ]
+            },
             "accordion_row_9yJ6fT": {
               "type": "_accordion-row",
               "settings": {
-                "heading": "{{ product.metafields.custom.product_faq.value.question.value }}",
+                "heading": "{{ closest.product.metafields.custom.product_faq.value.question.value }}",
                 "open_by_default": true,
                 "icon": "none",
                 "width": 20
@@ -1237,6 +1317,8 @@
             }
           },
           "block_order": [
+            "accordion_row_a9dcKH",
+            "accordion_row_Mmmck9",
             "accordion_row_9yJ6fT"
           ]
         }
@@ -1258,7 +1340,7 @@
         "section_width": "page-width",
         "section_height": "",
         "section_height_custom": 50,
-        "custom_class": "{{ product.metafields.custom.product_faq.value.question.value }}",
+        "custom_class": "",
         "color_scheme": "",
         "background_media": "none",
         "video_position": "cover",
