@@ -1289,7 +1289,7 @@
         "tab_metafields_QNPBBQ": {
           "type": "tab_metafields",
           "settings": {
-            "tab_title": "Additional Info{{ product.metafields.custom.dimensions.value }}",
+            "tab_title": "{{ product.metafields.custom.dimensions.value }}",
             "tab_icon": "icon-external",
             "metafield_namespace": "{{ product.metafields.custom.dimensions.value }}",
             "metafield_keys": ""
