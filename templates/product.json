@@ -1199,7 +1199,7 @@
             "accordion_row_9yJ6fT": {
               "type": "_accordion-row",
               "settings": {
-                "heading": "What is the return policy?",
+                "heading": "What is the return policy?{{ closest.product.metafields.custom.faq_info.value.question.value }}",
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20
@@ -1208,7 +1208,7 @@
                 "text_xi7jzr": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>Our goal is for every customer to be totally satisfied with their purchase. If this isn't the case, let us know and we'll do our best to work with you to make it right.</p>",
+                    "text": "<p>Our goal is for every customer to be totally satisfied with their purchase. If this isn't the case, let us know and we'll do our best to work with you to make it right.{{ closest.product.metafields.custom.faq_info.value.anaswer | metafield_tag }}</p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "left",
@@ -1274,76 +1274,6 @@
         "padding-block-start": 48,
         "padding-block-end": 48
       }
-    },
-    "product_custom_tabs_yYEBRq": {
-      "type": "product-custom-tabs",
-      "blocks": {
-        "tab_content_nPFiyn": {
-          "type": "tab_content",
-          "settings": {
-            "tab_title": "Description",
-            "tab_icon": "none",
-            "content": "<p>Product description and features.</p>"
-          }
-        },
-        "tab_accordion_gjb8mk": {
-          "type": "tab_accordion",
-          "disabled": true,
-          "settings": {
-            "tab_title": "Details",
-            "tab_icon": "icon-info",
-            "accordion_icon": "caret",
-            "dividers": true
-          }
-        },
-        "tab_metafields_QNPBBQ": {
-          "type": "tab_metafields",
-          "settings": {
-            "tab_title": "{{ product.metafields.custom.dimensions.value }}",
-            "tab_icon": "icon-external",
-            "metafield_namespace": "{{ product.metafields.custom.dimensions.value }}",
-            "metafield_keys": ""
-          }
-        },
-        "tab_metafields_kRpEjz": {
-          "type": "tab_metafields",
-          "settings": {
-            "tab_title": "{{ product.metafields.custom.warranty.value }}",
-            "tab_icon": "icon-external",
-            "metafield_namespace": "{{ product.metafields.custom.warranty.value }}",
-            "metafield_keys": ""
-          }
-        },
-        "tab_specifications_jYwEeG": {
-          "type": "tab_specifications",
-          "settings": {
-            "tab_title": "Specifications",
-            "tab_icon": "icon-inventory",
-            "show_product_type": true,
-            "show_vendor": true,
-            "show_tags": false,
-            "show_sku": true,
-            "show_barcode": false,
-            "show_weight": true
-          }
-        }
-      },
-      "block_order": [
-        "tab_content_nPFiyn",
-        "tab_accordion_gjb8mk",
-        "tab_metafields_QNPBBQ",
-        "tab_metafields_kRpEjz",
-        "tab_specifications_jYwEeG"
-      ],
-      "name": "Product Custom Tabs",
-      "settings": {
-        "heading": "Product Details",
-        "section_width": "page-width",
-        "gap": 16,
-        "color_scheme": "",
-        "padding-block-start": 36,
-        "padding-block-end": 36
-      }
     }
   },
   "order": [
@@ -1351,7 +1281,6 @@
     "product_custom_tabs_Anm9t8",
     "section_NaqU9X",
     "product_list_zR9Cym",
-    "section_zJPEbG",
-    "product_custom_tabs_yYEBRq"
+    "section_zJPEbG"
   ]
 }
