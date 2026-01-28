@@ -1213,7 +1213,7 @@
           "name": "Collapsible row",
           "settings": {}
   },
-  "settings_schema": {
+
     "sections": {
       "collapsible_content": {
       "name": "Collapsible content",
@@ -1447,4 +1447,4 @@
     }
     }
   }
-}
+
