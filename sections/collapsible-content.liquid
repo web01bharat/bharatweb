@@ -1,5 +1,4 @@
-{{ 'component-accordion.css' | asset_url | stylesheet_tag }}
-{{ 'collapsible-content.css' | asset_url | stylesheet_tag }}
+
 
 {%- style -%}
   .section-{{ section.id }}-padding {
@@ -83,7 +82,7 @@
                   <summary id="Summary-{{ block.id }}-{{ section.id }}">
                     {% render 'icon-accordion', icon: block.settings.icon %}
                     <h3 class="accordion__title inline-richtext h4">
-                      {{ block.settings.heading | default: block.settings.page.title | escape }}
+                      {{ block.settings.heading | default: block.settings.page.title | default: "Collapsible row" | escape }}
                     </h3>
                     {{- 'icon-caret.svg' | inline_asset_content -}}
                   </summary>
@@ -108,7 +107,7 @@
 
 {% schema %}
 {
-  "name": "collapsible_content",
+  "name": "t:sections.collapsible_content.name",
   "tag": "section",
   "class": "section",
   "disabled_on": {
@@ -124,7 +123,7 @@
       "type": "inline_richtext",
       "id": "heading",
       "label": "t:sections.collapsible_content.settings.heading.label",
-      "default": "Collapsible Content"
+      "default": "Collapsible content"
     },
     {
       "type": "select",
@@ -294,7 +293,7 @@
         {
           "type": "text",
           "id": "heading",
-          "default": "t:sections.collapsible_content.blocks.collapsible_row.settings.heading.default",
+          "default": "Collapsible row",
           "label": "t:sections.collapsible_content.blocks.collapsible_row.settings.heading.label"
         },
         {

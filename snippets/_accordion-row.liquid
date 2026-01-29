@@ -80,7 +80,11 @@
         {% endif %}
       {% else %}
         {%- comment -%} Default to blocks content for backward compatibility {%- endcomment -%}
-        {% content_for 'blocks' %}
+        {% if block_settings.custom_content != blank %}
+          <div class="rte">{{ block_settings.custom_content }}</div>
+        {% else %}
+          <p>Content not available.</p>
+        {% endif %}
       {% endif %}
     </div>
   </details>
