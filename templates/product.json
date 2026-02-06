@@ -226,6 +226,10 @@
                   "type": "_accordion-row",
                   "settings": {
                     "heading": "Details",
+                    "content_type": "blocks",
+                    "custom_content": "",
+                    "metafield_namespace": "",
+                    "metafield_key": "",
                     "open_by_default": false,
                     "icon": "none",
                     "width": 20
@@ -265,6 +269,10 @@
                   "type": "_accordion-row",
                   "settings": {
                     "heading": "Shipping & Returns",
+                    "content_type": "blocks",
+                    "custom_content": "",
+                    "metafield_namespace": "",
+                    "metafield_key": "",
                     "open_by_default": false,
                     "icon": "none",
                     "width": 20
@@ -1201,6 +1209,10 @@
               "name": "t:names.accordion_row",
               "settings": {
                 "heading": "When will I get my order?",
+                "content_type": "blocks",
+                "custom_content": "",
+                "metafield_namespace": "",
+                "metafield_key": "",
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20
@@ -1241,6 +1253,10 @@
               "name": "t:names.accordion_row",
               "settings": {
                 "heading": "When will I get my order?",
+                "content_type": "blocks",
+                "custom_content": "",
+                "metafield_namespace": "",
+                "metafield_key": "",
                 "open_by_default": false,
                 "icon": "none",
                 "width": 20
@@ -1280,6 +1296,10 @@
               "type": "_accordion-row",
               "settings": {
                 "heading": "{{ closest.product.metafields.custom.faq_info.value.question.value }}",
+                "content_type": "blocks",
+                "custom_content": "",
+                "metafield_namespace": "",
+                "metafield_key": "",
                 "open_by_default": true,
                 "icon": "none",
                 "width": 20
@@ -1356,6 +1376,68 @@
         "padding-block-start": 48,
         "padding-block-end": 48
       }
+    },
+    "collapsible_content_XqALE8": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_YYbkdP": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Collapsible row",
+            "icon": "check_mark",
+            "row_content": "",
+            "page": ""
+          }
+        },
+        "collapsible_row_M4c9Tm": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Collapsible row",
+            "icon": "check_mark",
+            "row_content": "",
+            "page": ""
+          }
+        },
+        "collapsible_row_LktNa8": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Collapsible row",
+            "icon": "check_mark",
+            "row_content": "",
+            "page": ""
+          }
+        },
+        "collapsible_row_e4NRtP": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Collapsible row",
+            "icon": "check_mark",
+            "row_content": "",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_YYbkdP",
+        "collapsible_row_M4c9Tm",
+        "collapsible_row_LktNa8",
+        "collapsible_row_e4NRtP"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "caption": "",
+        "heading": "Collapsible content",
+        "heading_size": "h1",
+        "heading_alignment": "center",
+        "layout": "none",
+        "container_color_scheme": "",
+        "color_scheme": "",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
@@ -1363,6 +1445,7 @@
     "product_custom_tabs_Anm9t8",
     "section_NaqU9X",
     "product_list_zR9Cym",
-    "section_zJPEbG"
+    "section_zJPEbG",
+    "collapsible_content_XqALE8"
   ]
 }
