@@ -40,6 +40,16 @@
     "variant_button_radius": 100,
     "variant_button_width": "default-width-buttons",
     "content_for_index": [],
+    "blocks": {
+      "15255627403292782234": {
+        "type": "shopify://apps/easy-tabs-product-tabs/blocks/easytabs-embed-product-widget/118e2a90-d31f-4cdf-b5c9-747e2bddd19a",
+        "disabled": false,
+        "settings": {
+          "placement_selector": "",
+          "multiple_widgets": true
+        }
+      }
+    },
     "color_schemes": {
       "scheme-1": {
         "settings": {
