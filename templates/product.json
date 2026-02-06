@@ -1385,7 +1385,7 @@
           "settings": {
             "heading": "Collapsible row",
             "icon": "check_mark",
-            "row_content": "",
+            "row_content": "<p>this is test</p>",
             "page": ""
           }
         },
@@ -1394,7 +1394,7 @@
           "settings": {
             "heading": "Collapsible row",
             "icon": "check_mark",
-            "row_content": "",
+            "row_content": "<p>this is test file</p>",
             "page": ""
           }
         },
