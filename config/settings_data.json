@@ -45,7 +45,7 @@
         "type": "shopify://apps/easy-tabs-product-tabs/blocks/easytabs-embed-product-widget/118e2a90-d31f-4cdf-b5c9-747e2bddd19a",
         "disabled": false,
         "settings": {
-          "placement_selector": "",
+          "placement_selector": "template",
           "multiple_widgets": true
         }
       }
