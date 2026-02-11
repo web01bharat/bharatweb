@@ -1445,7 +1445,7 @@
         "easy_tabs_product_tabs_easytabs_block_product_widget_JGcWji": {
           "type": "shopify://apps/easy-tabs-product-tabs/blocks/easytabs-block-product-widget/118e2a90-d31f-4cdf-b5c9-747e2bddd19a",
           "settings": {
-            "placement_selector": "{{ closest.product.metafields.custom.product_faq.value.question.value }}{{ closest.product.metafields.custom.product_faq.value.question.value }}",
+            "placement_selector": "{{ closest.product.metafields.custom.dimensions.value }}",
             "multiple_widgets": true
           }
         }
