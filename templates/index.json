@@ -1246,7 +1246,9 @@
           "source": "{{ metaobjects.product_faq.bharat }}",
           "settings": {
             "heading": "{{ metaobjects.product_faq.bharat.question.value }}",
-            "row_content": "{{ metaobjects.product_faq.bharat.ans | metafield_tag }}"
+            "icon": "check_mark",
+            "row_content": "{{ metaobjects.product_faq.bharat.ans | metafield_tag }}",
+            "page": ""
           }
         },
         "collapsible_row_MfqQ4M": {
@@ -1298,6 +1300,46 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "faq_KJ6tkj": {
+      "type": "faq",
+      "blocks": {
+        "accordion_row_9qLDdM": {
+          "type": "accordion_row",
+          "settings": {}
+        },
+        "accordion_row_jyfPeJ": {
+          "type": "accordion_row",
+          "settings": {}
+        },
+        "accordion_row_cgVrnj": {
+          "type": "accordion_row",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "accordion_row_9qLDdM",
+        "accordion_row_jyfPeJ",
+        "accordion_row_cgVrnj"
+      ],
+      "name": "FAQ Accordion",
+      "settings": {
+        "heading": "Frequently Asked Questions{{ metaobjects.product_faq.bharat.question.value }}",
+        "heading_tag": "h2",
+        "heading_size": "h2",
+        "subheading": "",
+        "icon": "caret",
+        "dividers": true,
+        "type_preset": "h6",
+        "inherit_color_scheme": true,
+        "color_scheme": "",
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_radius": 0
+      }
     }
   },
   "order": [
@@ -1307,6 +1349,7 @@
     "collection_list_xpBxCm",
     "section_hMJkdc",
     "featured_blog_posts_tFQtHb",
-    "collapsible_content_j9VaJH"
+    "collapsible_content_j9VaJH",
+    "faq_KJ6tkj"
   ]
 }
