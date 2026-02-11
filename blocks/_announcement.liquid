@@ -3,17 +3,7 @@
 {%- assign block_settings = block.settings -%}
 {%- assign plain_text = block_settings.text | strip_newlines | strip_html | strip -%}
 {%- assign block_index = section.blocks | find_index: 'id', block.id -%}
-  <div class="announcement-social">
-  <a href="https://instagram.com/yourpage" target="_blank">
-    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" width="18">
-  </a>
-  <a href="https://facebook.com/yourpage" target="_blank">
-    <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" width="18">
-  </a>
-  <a href="https://twitter.com/yourpage" target="_blank">
-    <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" width="18">
-  </a>
-</div>
+<div class="ansbar">
 {%- unless plain_text == '' -%}
   <slideshow-slide
     ref="slides[]"
@@ -51,11 +41,25 @@
       </a>
     {% endif %}
   </slideshow-slide>
-
+  <div class="announcement-social">
+  <a href="https://instagram.com/yourpage" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" width="18">
+  </a>
+  <a href="https://facebook.com/yourpage" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" width="18">
+  </a>
+  <a href="https://twitter.com/yourpage" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" width="18">
+  </a>
+</div>
 {%- endunless -%}
+</div>
 
 
 {% stylesheet %}
+.ansbar {
+  display: flex;
+}
   .text-block:not(.text-block--full-width).rte,
   .text-block:not(.text-block--full-width).paragraph {
     /* Safari doesn't support pretty, so fallback to balance */
